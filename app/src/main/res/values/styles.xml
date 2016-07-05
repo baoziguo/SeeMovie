@@ -62,7 +62,7 @@
     </style>
 
     <style name="style_button_logout" parent="style_text_white">
-        <item name="android:background">@drawable/btn_logout_selector</item>
+        <item name="android:background">@drawable/btn_login_selector</item>
     </style>
 
     <style name="style_text_1e1e1e" parent="style_text">

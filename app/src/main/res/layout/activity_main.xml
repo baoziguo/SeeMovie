@@ -9,7 +9,8 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -20,7 +21,7 @@
                 android:id="@+id/btn_conversation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/top_bar"
+                android:background="@color/red"
                 android:drawableTop="@drawable/tab_message_btn"
                 android:onClick="onTabSelect"
                 android:paddingBottom="2dip"
@@ -55,7 +56,7 @@
                 android:id="@+id/btn_contact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/top_bar"
+                android:background="@color/red"
                 android:drawableTop="@drawable/tab_contact_btn"
                 android:onClick="onTabSelect"
                 android:paddingBottom="2dip"
@@ -86,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/top_bar"
+            android:background="@color/red"
             android:drawableTop="@drawable/tab_set_btn"
             android:onClick="onTabSelect"
             android:paddingBottom="2dip"

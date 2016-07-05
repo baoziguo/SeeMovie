@@ -6,15 +6,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.greenrobot.eventbus.Subscribe;
-
-import butterknife.Bind;
-import butterknife.OnClick;
-import com.baozi.seemovie.R;
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.bean.User;
 import com.baozi.movie.event.FinishEvent;
 import com.baozi.movie.model.UserModel;
+import com.baozi.seemovie.R;
+
+import org.greenrobot.eventbus.Subscribe;
+
+import butterknife.Bind;
+import butterknife.OnClick;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.v3.exception.BmobException;
