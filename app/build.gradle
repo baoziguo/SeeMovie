@@ -16,7 +16,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //自动删除 unaligned .apks
             applicationVariants.all { variant ->
@@ -63,4 +64,5 @@ dependencies {
     compile 'cn.bmob.android:bmob-im:2.0.5@aar'
     //bmob-sdk:3.4.7
     compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
+    compile 'fm.jiecao:jiecaovideoplayer:3.6.2'
 }

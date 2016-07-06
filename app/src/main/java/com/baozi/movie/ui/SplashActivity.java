@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.baozi.movie.util.StatusBarUtil;
 import com.baozi.seemovie.R;
 import com.baozi.movie.bean.User;
 import com.baozi.movie.base.BaseActivity;
@@ -20,6 +21,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        StatusBarUtil.setTransparent(this);
         Handler handler =new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
@@ -31,7 +33,7 @@ public class SplashActivity extends BaseActivity {
                     startActivity(MainActivity.class,null,true);
                 }
             }
-        },1000);
+        },2000);
 
     }
 }
