@@ -21,19 +21,25 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        StatusBarUtil.setTransparent(this);
         Handler handler =new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 User user = UserModel.getInstance().getCurrentUser();
                 if (user == null) {
-                    startActivity(LoginActivity.class,null,true);
+//                    startActivity(LoginActivity.class,null,true);
+                    startActivity(TumblrActivity.class,null,true);
                 }else{
-                    startActivity(MainActivity.class,null,true);
+//                    startActivity(MainActivity.class,null,true);
+                    startActivity(TumblrActivity.class,null,true);
                 }
             }
         },2000);
 
+    }
+
+    @Override
+    public void setStatusState(int color) {
+        StatusBarUtil.setTransparent(this);
     }
 }

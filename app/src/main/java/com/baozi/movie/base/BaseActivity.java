@@ -3,6 +3,7 @@ package com.baozi.movie.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +13,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import com.baozi.movie.Config;
+import com.baozi.movie.util.StatusBarUtil;
+import com.baozi.seemovie.R;
 import com.orhanobut.logger.Logger;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -40,7 +43,13 @@ public class BaseActivity extends FragmentActivity {
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         ButterKnife.bind(this);
+        setStatusState(getResources().getColor(R.color.colorPrimary));
         initView();
+    }
+
+    public void setStatusState(int color) {
+        if (Build.VERSION.SDK_INT == 19)
+            StatusBarUtil.setColor(this, color, 0);
     }
 
     @Override

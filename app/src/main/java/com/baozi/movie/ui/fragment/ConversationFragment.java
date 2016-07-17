@@ -57,7 +57,8 @@ public class ConversationFragment extends ParentWithNaviFragment {
 
     @Override
     public Object right() {
-        return R.drawable.base_action_bar_add_bg_selector;
+//        return R.drawable.base_action_bar_add_bg_selector;
+        return R.mipmap.add;
     }
 
     @Override

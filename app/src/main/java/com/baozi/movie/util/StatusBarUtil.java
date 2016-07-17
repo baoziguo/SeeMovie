@@ -119,7 +119,7 @@ public class StatusBarUtil {
             return;
         }
         transparentStatusBar(activity);
-        setRootView(activity);
+//        setRootView(activity);
     }
 
     /**
@@ -367,8 +367,8 @@ public class StatusBarUtil {
      */
     private static void setRootView(Activity activity) {
         ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-//        rootView.setFitsSystemWindows(true);
-//        rootView.setClipToPadding(true);
+        rootView.setFitsSystemWindows(true);
+        rootView.setClipToPadding(true);
     }
 
     /**
