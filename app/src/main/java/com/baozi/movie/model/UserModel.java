@@ -153,6 +153,39 @@ public class UserModel extends BaseModel {
         });
     }
 
+    /**
+     * 查询全部用户
+     * @param limit
+     * @param listener
+     */
+    public void queryAllUsers(int limit,final FindListener<User> listener){
+        BmobQuery<User> query = new BmobQuery<>();
+        //去掉当前用户
+        try {
+            BmobUser user = BmobUser.getCurrentUser(getContext());
+            query.addWhereNotEqualTo("username",user.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        query.setLimit(limit);
+        query.order("-createdAt");
+        query.findObjects(getContext(), new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) {
+                if (list != null && list.size() > 0) {
+                    listener.onSuccess(list);
+                } else {
+                    listener.onError(CODE_NULL, "查无此人");
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                listener.onError(i, s);
+            }
+        });
+    }
+
     /**查询用户信息
      * @param objectId
      * @param listener

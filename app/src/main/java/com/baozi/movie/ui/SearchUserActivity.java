@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.baozi.movie.util.HideIMEUtil;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -53,6 +54,7 @@ public class SearchUserActivity extends ParentWithNaviActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
+        HideIMEUtil.wrap(this);
         initNaviView();
         adapter =new SearchUserAdapter();
         layoutManager = new LinearLayoutManager(this);
@@ -90,7 +92,23 @@ public class SearchUserActivity extends ParentWithNaviActivity {
     public void query(){
         String name =et_find_name.getText().toString();
         if(TextUtils.isEmpty(name)){
-            toast("请填写用户名");
+//            toast("请填写用户名");
+            UserModel.getInstance().queryAllUsers(BaseModel.DEFAULT_LIMIT, new FindListener<User>() {
+                @Override
+                public void onSuccess(List<User> list) {
+                    sw_refresh.setRefreshing(false);
+                    adapter.setDatas(list);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    sw_refresh.setRefreshing(false);
+                    adapter.setDatas(null);
+                    adapter.notifyDataSetChanged();
+                    toast(s + "(" + i + ")");
+                }
+            });
             sw_refresh.setRefreshing(false);
             return;
         }

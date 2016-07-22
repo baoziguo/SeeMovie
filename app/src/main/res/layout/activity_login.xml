@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_marginTop="@dimen/height_50"
         android:orientation="vertical" >
 
        <!-- <ImageView

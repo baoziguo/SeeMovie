@@ -9,6 +9,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
+import com.baozi.movie.util.HideIMEUtil;
 import com.baozi.seemovie.R;
 import com.baozi.movie.base.ParentWithNaviActivity;
 import com.baozi.movie.event.FinishEvent;
@@ -43,6 +45,7 @@ public class RegisterActivity extends ParentWithNaviActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        HideIMEUtil.wrap(this);
         initNaviView();
     }
 

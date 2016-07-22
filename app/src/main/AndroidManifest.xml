@@ -40,10 +40,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.baozi.movie.ui.LoginActivity" />
+        <activity android:name="com.baozi.movie.ui.LoginActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity android:name="com.baozi.movie.ui.MainActivity" />
-        <activity android:name="com.baozi.movie.ui.RegisterActivity" />
-        <activity android:name="com.baozi.movie.ui.SearchUserActivity" />
+        <activity android:name="com.baozi.movie.ui.RegisterActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <activity android:name="com.baozi.movie.ui.SearchUserActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity android:name="com.baozi.movie.ui.UserInfoActivity"/>
         <activity android:name="com.baozi.movie.ui.NewFriendActivity"/>
         <activity android:name="com.baozi.movie.ui.TumblrActivity"/>

@@ -8,18 +8,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.bean.User;
 import com.baozi.movie.bean.kePao;
 import com.baozi.movie.event.FinishEvent;
 import com.baozi.movie.model.UserModel;
+import com.baozi.movie.util.HideIMEUtil;
 import com.baozi.seemovie.R;
+
 import org.greenrobot.eventbus.Subscribe;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.OnClick;
 import cn.bmob.newim.BmobIM;
@@ -30,7 +35,9 @@ import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadBatchListener;
 
-/**登陆界面
+/**
+ * 登陆界面
+ *
  * @author :smile
  * @project:LoginActivity
  * @date :2016-01-15-18:23
@@ -45,21 +52,34 @@ public class LoginActivity extends BaseActivity {
     Button btn_login;
     @Bind(R.id.tv_register)
     TextView tv_register;
+    private boolean isFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        HideIMEUtil.wrap(this);
+        tv_register.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (isFlag) {
+                    Toast.makeText(LoginActivity.this, "开始上传", Toast.LENGTH_LONG).show();
+                    upLoadFile();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @OnClick(R.id.btn_login)
-    public void onLoginClick(View view){
+    public void onLoginClick(View view) {
         UserModel.getInstance().login(et_username.getText().toString(), et_password.getText().toString(), new LogInListener() {
 
             @Override
             public void done(Object o, BmobException e) {
                 if (e == null) {
-                    User user =(User)o;
+                    User user = (User) o;
                     BmobIM.getInstance().updateUserInfo(new BmobIMUserInfo(user.getObjectId(), user.getUsername(), user.getAvatar()));
                     startActivity(MainActivity.class, null, true);
                 } else {
@@ -70,27 +90,26 @@ public class LoginActivity extends BaseActivity {
     }
 
     @OnClick(R.id.tv_register)
-    public void onRegisterClick(View view){
-//        startActivity(RegisterActivity.class, null, false);
-        upLoadFile();
+    public void onRegisterClick(View view) {
+        startActivity(RegisterActivity.class, null, false);
     }
 
     @Subscribe
-    public void onEventMainThread(FinishEvent event){
+    public void onEventMainThread(FinishEvent event) {
         finish();
     }
 
     private void upLoadFile() {
         List<String> videoPathFromSD = getVideoPathFromSD();
-        final String [] VideoPaths = videoPathFromSD.toArray(new String[videoPathFromSD.size()]);
+        final String[] VideoPaths = videoPathFromSD.toArray(new String[videoPathFromSD.size()]);
         BmobFile.uploadBatch(LoginActivity.this, VideoPaths, new UploadBatchListener() {
 
             @Override
             public void onSuccess(List<BmobFile> files, List<String> urls) {
                 Date now = new Date();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                String hehe = dateFormat.format( now );
-                if(urls.size()==VideoPaths.length){//如果数量相等，则代表文件全部上传完成
+                String hehe = dateFormat.format(now);
+                if (urls.size() == VideoPaths.length) {//如果数量相等，则代表文件全部上传完成
                     Toast.makeText(LoginActivity.this, "已全部上传完毕", Toast.LENGTH_LONG).show();
                     for (int i = 0; i < files.size(); i++) {
                         kePao kePao = new kePao();
@@ -100,7 +119,8 @@ public class LoginActivity extends BaseActivity {
                         kePao.save(LoginActivity.this, new SaveListener() {
                             @Override
                             public void onSuccess() {
-                                Log.i("baozi","成功");
+                                Log.i("baozi", "成功");
+                                tv_register.setText("上传完毕");
                             }
 
                             @Override
@@ -119,7 +139,7 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            public void onProgress(int curIndex, int curPercent, int total,int totalPercent) {
+            public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
                 //1、curIndex--表示当前第几个文件正在上传
                 //2、curPercent--表示当前上传文件的进度值（百分比）
                 //3、total--表示总的上传文件数
@@ -144,7 +164,7 @@ public class LoginActivity extends BaseActivity {
             File file = files[i];
 //            if (checkIsImageFile(file.getPath())) {
             picList.add(file.getPath());
-            Log.d("baozi.......",  file.getPath());
+            Log.d("baozi.......", file.getPath());
 //            }
 
         }
