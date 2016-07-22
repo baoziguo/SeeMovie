@@ -11,13 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.baozi.movie.Config;
 import com.baozi.movie.util.StatusBarUtil;
 import com.baozi.seemovie.R;
 import com.orhanobut.logger.Logger;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.ButterKnife;
 
 /**基类
@@ -141,5 +146,49 @@ public class BaseActivity extends FragmentActivity {
             Logger.i(msg);
         }
     }
+
+    /**
+     * 设置title
+     * @param title
+     */
+    protected void setTitle(String title){//设置title
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText(title);
+    }
+
+    /**
+     * 左侧返回按钮 by：baozi
+     * @param listener
+     */
+    protected void showLeftButton(View.OnClickListener listener){//
+        ImageView tv_left = (ImageView) findViewById(R.id.tv_left);
+        tv_left.setOnClickListener(listener);
+    }
+
+    /**
+     * 左侧图标替换按钮 by：baozi
+     * @param resourceId
+     * @param listener
+     */
+    protected void showLeftButton(int resourceId, View.OnClickListener listener){
+        ImageView tv_left = (ImageView) findViewById(R.id.tv_left);
+        tv_left.setOnClickListener(listener);
+        tv_left.setBackgroundResource(resourceId);
+    }
+
+    /**
+     * 设置正常的标题和返回键
+     */
+    protected void setNormalTitle(String titleName){
+        setTitle(titleName);
+        showLeftButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+
 
 }

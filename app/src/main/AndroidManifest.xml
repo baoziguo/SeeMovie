@@ -31,9 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.baozi.movie.ui.SplashActivity"
+            android:name="com.baozi.movie.ui.WebViewActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +47,7 @@
         <activity android:name="com.baozi.movie.ui.UserInfoActivity"/>
         <activity android:name="com.baozi.movie.ui.NewFriendActivity"/>
         <activity android:name="com.baozi.movie.ui.TumblrActivity"/>
+        <!--<activity android:name="com.baozi.movie.ui.WebViewActivity"/>-->
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >

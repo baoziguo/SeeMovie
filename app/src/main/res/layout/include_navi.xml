@@ -31,10 +31,14 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/style_text_large"
+            android:layout_height="wrap_content"
+            android:layout_width="200dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_margin="2dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_large"
             android:textColor="@color/base_color_text_white"
             />
 
