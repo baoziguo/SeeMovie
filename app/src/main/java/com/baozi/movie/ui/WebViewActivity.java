@@ -3,9 +3,11 @@ package com.baozi.movie.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.ui.weight.ProgressWebView;
 import com.baozi.seemovie.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

@@ -6,9 +6,10 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/include_navi"/>
-
+    <!--stl_dividerColor 中间分割线颜色-->
+    <!--stl_indicatorThickness 指示器厚度-->
+    <!--stl_indicatorInterpolation 指示器滚动插值器-->
     <com.ogaclejapan.smarttablayout.SmartTabLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/tab_view"
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
         app:stl_indicatorColor="@color/colorPrimary"
         app:stl_indicatorCornerRadius="1.5dp"
         app:stl_indicatorInterpolation="smart"
-        app:stl_indicatorThickness="3dp"
+        app:stl_indicatorThickness="2dp"
         app:stl_underlineColor="@color/transparent"
         />
 

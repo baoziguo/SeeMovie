@@ -4,8 +4,14 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.baozi.movie.base.BaseActivity;
+import com.baozi.movie.ui.fragment.GridViewFragment;
+import com.baozi.movie.ui.fragment.ListViewFragment;
+import com.baozi.movie.ui.fragment.RecyclerViewFragment;
+import com.baozi.movie.ui.fragment.ScrollViewFragment;
+import com.baozi.movie.ui.fragment.WebViewFragment;
 import com.baozi.seemovie.R;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.Bundler;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
@@ -35,12 +41,11 @@ public class TabActivity extends BaseActivity {
         viewpager.setOffscreenPageLimit(6);
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
-//                .add("全部", AllDetailedFragmentNew.class, new Bundler().putInt("type", 0).get())
-//                .add("充值", RedDetailedFragmentNew.class, new Bundler().putInt("type", 1).get())
-//                .add("投资", RedDetailedFragmentNew.class, new Bundler().putInt("type", 2).get())
-//                .add("回款", RedDetailedFragmentNew.class, new Bundler().putInt("type", 3).get())
-//                .add("收益", RedDetailedFragmentNew.class, new Bundler().putInt("type", 4).get())
-//                .add("提现", RedDetailedFragmentNew.class, new Bundler().putInt("type", 5).get())
+                .add("全部", GridViewFragment.class, new Bundler().putInt("type", 0).get())
+                .add("充值", ListViewFragment.class, new Bundler().putInt("type", 1).get())
+                .add("投资", RecyclerViewFragment.class, new Bundler().putInt("type", 2).get())
+                .add("回款", ScrollViewFragment.class, new Bundler().putInt("type", 3).get())
+                .add("收益", WebViewFragment.class, new Bundler().putInt("type", 4).get())
                 .create());
 
         viewpager.setAdapter(adapter);
