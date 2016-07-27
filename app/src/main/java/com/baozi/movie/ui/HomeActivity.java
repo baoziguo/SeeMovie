@@ -149,8 +149,8 @@ public class HomeActivity extends BaseActivity {
     private class HeaderAdapter extends PagerAdapter {
 
         public int[] images = new int[]{//
-                R.mipmap.image1, R.mipmap.image2, R.mipmap.image3,//
-                R.mipmap.image4, R.mipmap.image5};
+                R.mipmap.c, R.mipmap.b, R.mipmap.e,//
+                R.mipmap.g, R.mipmap.v, R.mipmap.x, R.mipmap.z};
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
