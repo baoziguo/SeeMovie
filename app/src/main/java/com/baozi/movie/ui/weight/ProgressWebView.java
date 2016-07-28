@@ -37,6 +37,13 @@ public class ProgressWebView extends WebView {
                 handler.proceed();
                 super.onReceivedSslError(view, handler, error);
             }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //处理自动跳转到浏览器的问题
+                view.loadUrl(url);
+                return true;
+            }
         });
         //是否可以缩放
         setBackgroundColor(Color.WHITE);

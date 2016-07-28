@@ -3,13 +3,17 @@ package com.baozi.movie.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
+import android.view.KeyEvent;
+import android.view.View;
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.ui.weight.ProgressWebView;
 import com.baozi.seemovie.R;
-
+import com.liaoinstan.springview.widget.SpringView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by baozi on 2016/7/22.
@@ -18,13 +22,40 @@ public class WebViewActivity extends BaseActivity {
 
     @Bind(R.id.webview)
     ProgressWebView webview;
+    @Bind(R.id.nest)
+    NestedScrollView nest;
+    @Bind(R.id.spring_view)
+    SpringView springView;
+    @Bind(R.id.fabButton)
+    FloatingActionButton fabButton;
+    private int top;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baseweb);
         ButterKnife.bind(this);
+//        caoNiMa();
     }
+
+//    private void caoNiMa() {
+//        top = DensityUtil.dip2px(this, 48);
+//        springView.animate().translationY(top);
+//        nest.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                log("scrollX:" + scrollX + ",scrollY:" + scrollY + ",oldScrollX:" + oldScrollX + ",oldScrollY:" + oldScrollY);
+//                if (scrollY == 0)
+//                    springView.animate().translationY(top);
+//                else if (scrollY - oldScrollY > 0) {
+//                    springView.animate().translationY(scrollY - oldScrollY);
+//                } else {
+//                    springView.animate().translationY(scrollY - oldScrollY);
+//                }
+//
+//            }
+//        });
+//    }
 
     @Override
     protected void initView() {
@@ -34,8 +65,6 @@ public class WebViewActivity extends BaseActivity {
         if (url != null) {
             webview.loadUrl(url);
         }
-        titleName = "【捏脸】（超多图）剑网3玩家捏脸数据分享 心水的带走";
-        webview.loadUrl("http://mp.weixin.qq.com/s?src=3&timestamp=1469176961&ver=1&signature=X6EIyr653dboag2iu5*2aVYOWslLVYcLXoLaqTdVefEY3l-8YBVQdk2zuqJpR2wmoV3cqs0GYeQLks9sGb5ycGvsiJh34JbARbOauRa9Ck6AdHS1AmyS1xN02Vu-K-D9lAAQxYQIlnqWNV3PUNTzyX8GWcHR5weFPO0*TUpDB2Y=");
         setNormalTitle(titleName);
     }
 
@@ -46,4 +75,23 @@ public class WebViewActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    @OnClick({R.id.spring_view, R.id.fabButton})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.spring_view:
+                break;
+            case R.id.fabButton:
+                nest.smoothScrollTo(0, 0);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
+            webview.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

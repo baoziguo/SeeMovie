@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.baozi.movie.adapter.TumblrAdapter;
+import com.baozi.movie.adapter.WeiXinAdapter;
 import com.baozi.movie.base.HeaderViewPagerFragment;
-import com.baozi.movie.bean.kePao;
+import com.baozi.movie.bean.weiXin;
 import com.baozi.seemovie.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,21 +21,21 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
-public class TumblrViewFragment extends HeaderViewPagerFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class WeixinViewFragment extends HeaderViewPagerFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @Bind(R.id.swipeToLoadLayout)
     SwipeRefreshLayout swipeToLoadLayout;
-    private TumblrAdapter mAdapter;
+    private WeiXinAdapter mAdapter;
     private int page = 0;
-    private List<kePao> allList = new ArrayList<>();
+    private List<weiXin> allList = new ArrayList<>();
     private LinearLayoutManager mLinearLayoutManager;
     private int pastVisiblesItems, visibleItemCount, totalItemCount;
     private boolean loading = false;
 
-    public static TumblrViewFragment newInstance() {
-        return new TumblrViewFragment();
+    public static WeixinViewFragment newInstance() {
+        return new WeixinViewFragment();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class TumblrViewFragment extends HeaderViewPagerFragment implements Swipe
     }
 
     private void initData(int page) {
-        BmobQuery<kePao> query = new BmobQuery<kePao>();
+        BmobQuery<weiXin> query = new BmobQuery<>();
         //按照时间降序
         query.order("-createdAt");
         //限制最多20条数据结果作为一页
@@ -81,25 +81,20 @@ public class TumblrViewFragment extends HeaderViewPagerFragment implements Swipe
         //跳过之前页数并去掉重复数据
         query.setSkip(page * 20);
         //执行查询，第一个参数为上下文，第二个参数为查找的回调
-        query.findObjects(getActivity(), new FindListener<kePao>() {
+        query.findObjects(getActivity(), new FindListener<weiXin>() {
 
             @Override
-            public void onSuccess(List<kePao> loveEntity) {
+            public void onSuccess(List<weiXin> weiXinList) {
                 if (swipeToLoadLayout.isRefreshing()) {
                     swipeToLoadLayout.setRefreshing(false);
                 }
                 loading = false;
-                allList.addAll(loveEntity);
+                allList.addAll(weiXinList);
                 if (mAdapter == null) {
-                    mAdapter = new TumblrAdapter(getActivity(), allList);
-//                    AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
-//                    alphaAdapter.setFirstOnly(true);
-//                    alphaAdapter.setDuration(500);
-//                    alphaAdapter.setInterpolator(new OvershootInterpolator(0.5f));
-//                    mRecyclerView.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
+                    mAdapter = new WeiXinAdapter(getActivity(), allList);
                     mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mAdapter));
                 } else {
-                    if (loveEntity.isEmpty()){
+                    if (weiXinList.isEmpty()){
                         Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
                         return;
                     }

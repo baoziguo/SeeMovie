@@ -11,20 +11,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.base.HeaderViewPagerFragment;
 import com.baozi.movie.ui.fragment.TumblrViewFragment;
+import com.baozi.movie.ui.fragment.WeixinViewFragment;
 import com.baozi.movie.util.StatusBarUtil;
 import com.baozi.movie.util.Utils;
 import com.baozi.seemovie.R;
 import com.lzy.widget.HeaderViewPager;
 import com.lzy.widget.tab.CircleIndicator;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -58,7 +56,7 @@ public class HomeActivity extends BaseActivity {
         //内容的fragment
         fragments = new ArrayList<>();
         fragments.add(TumblrViewFragment.newInstance());
-        fragments.add(TumblrViewFragment.newInstance());
+        fragments.add(WeixinViewFragment.newInstance());
         fragments.add(TumblrViewFragment.newInstance());
 //        fragments.add(RecyclerViewFragment.newInstance());
 //        fragments.add(WebViewFragment.newInstance());
@@ -78,6 +76,7 @@ public class HomeActivity extends BaseActivity {
         ci.setViewPager(pagerHeader);
 
         //tab标签和内容viewpager
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(new ContentAdapter(getSupportFragmentManager()));
         tabs.setViewPager(viewPager);
         scrollableLayout.setCurrentScrollableContainer(fragments.get(0));

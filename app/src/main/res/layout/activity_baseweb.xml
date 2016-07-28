@@ -1,25 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <include layout="@layout/include_navi"/>
-
-    <com.liaoinstan.springview.widget.SpringView
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:header="@layout/header_web"
-        app:type="overlap"
-        android:background="#797a7d">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.baozi.movie.ui.weight.ProgressWebView
-            android:id="@+id/webview"
+        <!--LinearLayout包裹是考虑兼容-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <include layout="@layout/include_navi" />
+
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+        <com.liaoinstan.springview.widget.SpringView
+            android:id="@+id/spring_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="#797a7d"
+            app:header="@layout/header_web"
+            app:type="overlap">
 
-    </com.liaoinstan.springview.widget.SpringView>
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+                <com.baozi.movie.ui.weight.ProgressWebView
+                    android:id="@+id/webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-</LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </com.liaoinstan.springview.widget.SpringView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_arrow_upward_white_24px"
+        app:backgroundTint="@color/colorAccent"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:layout_behavior="com.baozi.movie.ui.weight.ScrollAwareFABBehavior"
+        app:pressedTranslationZ="12dp"
+        app:rippleColor="#33728dff" />
+
+</android.support.design.widget.CoordinatorLayout>

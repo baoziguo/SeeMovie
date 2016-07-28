@@ -51,7 +51,7 @@
         <activity android:name="com.baozi.movie.ui.NewFriendActivity"/>
         <activity android:name="com.baozi.movie.ui.TumblrActivity"/>
         <!--<activity android:name="com.baozi.movie.ui.HomeActivity"/>-->
-        <!--<activity android:name="com.baozi.movie.ui.WebViewActivity"/>-->
+        <activity android:name="com.baozi.movie.ui.WebViewActivity"/>
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
