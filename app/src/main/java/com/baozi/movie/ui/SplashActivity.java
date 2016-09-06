@@ -3,7 +3,6 @@ package com.baozi.movie.ui;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-
 import com.baozi.movie.util.StatusBarUtil;
 import com.baozi.seemovie.R;
 import com.baozi.movie.bean.User;
@@ -27,11 +26,9 @@ public class SplashActivity extends BaseActivity {
             public void run() {
                 User user = UserModel.getInstance().getCurrentUser();
                 if (user == null) {
-//                    startActivity(LoginActivity.class,null,true);
-                    startActivity(TumblrActivity.class,null,true);
+                    startActivity(com.baozi.movie.ui.materiallogin.MainActivity.class,null,true);
                 }else{
-//                    startActivity(MainActivity.class,null,true);
-                    startActivity(TumblrActivity.class,null,true);
+                    startActivity(HomeActivity.class,null,true);
                 }
             }
         },2000);

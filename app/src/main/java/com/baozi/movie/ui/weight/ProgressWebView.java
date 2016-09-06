@@ -3,13 +3,11 @@ package com.baozi.movie.ui.weight;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.http.SslError;
 import android.util.AttributeSet;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
 import com.baozi.seemovie.R;
 
 /**
@@ -31,25 +29,11 @@ public class ProgressWebView extends WebView {
         progressbar.setProgressDrawable(drawable);
         addView(progressbar);
         setWebChromeClient(new WebChromeClient());
-        setWebViewClient(new WebViewClient(){
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed();
-                super.onReceivedSslError(view, handler, error);
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                //处理自动跳转到浏览器的问题
-                view.loadUrl(url);
-                return true;
-            }
-        });
         //是否可以缩放
         setBackgroundColor(Color.WHITE);
         getSettings().setSupportZoom(true);
         setVerticalScrollBarEnabled(false);
-        getSettings().setUseWideViewPort(true);
+        getSettings().setUseWideViewPort(true);//设置加载进来的页面自适应手机屏幕（可缩放）
         getSettings().supportMultipleWindows();
         getSettings().setDomStorageEnabled(true);
         getSettings().setJavaScriptEnabled(true);
@@ -59,7 +43,7 @@ public class ProgressWebView extends WebView {
         getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         clearFocus();
 //        removeAllViews();
-        clearCache(true);
+//        clearCache(true);
 
     }
 

@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <include layout="@layout/include_navi" />
 
@@ -31,13 +31,13 @@
             android:layout_height="match_parent"
             android:background="#797a7d"
             app:header="@layout/header_web"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:type="overlap">
 
             <android.support.v4.widget.NestedScrollView
                 android:id="@+id/nest"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_height="match_parent">
 
                 <com.baozi.movie.ui.weight.ProgressWebView
                     android:id="@+id/webview"

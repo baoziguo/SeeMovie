@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/status_bar_fix"
@@ -20,14 +21,14 @@
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"/>
 
-        <ImageView
+        <com.baozi.movie.ui.weight.CircleImageView
             android:id="@+id/back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:visibility="gone"
-            android:src="@mipmap/head"/>
+            android:src="@mipmap/head" />
 
         <!--<ImageView-->
             <!--android:id="@+id/more"-->

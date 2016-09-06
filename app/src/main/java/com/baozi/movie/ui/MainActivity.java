@@ -3,17 +3,11 @@ package com.baozi.movie.ui;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.orhanobut.logger.Logger;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
-import butterknife.Bind;
-import com.baozi.seemovie.R;
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.bean.User;
 import com.baozi.movie.db.NewFriendManager;
@@ -22,6 +16,13 @@ import com.baozi.movie.ui.fragment.ContactFragment;
 import com.baozi.movie.ui.fragment.ConversationFragment;
 import com.baozi.movie.ui.fragment.SetFragment;
 import com.baozi.movie.util.IMMLeaks;
+import com.baozi.seemovie.R;
+import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import butterknife.Bind;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.core.ConnectionStatus;
 import cn.bmob.newim.event.MessageEvent;
@@ -67,6 +68,10 @@ public class MainActivity extends BaseActivity implements ObseverListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //connect server
+        Explode explode = new Explode();
+        explode.setDuration(500);
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
         User user = BmobUser.getCurrentUser(this,User.class);
         BmobIM.connect(user.getObjectId(), new ConnectListener() {
             @Override

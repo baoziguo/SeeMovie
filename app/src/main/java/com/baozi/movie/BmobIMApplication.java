@@ -1,14 +1,16 @@
 package com.baozi.movie;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
+import com.baozi.movie.base.UniversalImageLoader;
 import com.orhanobut.logger.Logger;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-import com.baozi.movie.base.UniversalImageLoader;
 import cn.bmob.newim.BmobIM;
 
 /**
@@ -19,6 +21,7 @@ import cn.bmob.newim.BmobIM;
 public class BmobIMApplication extends Application{
 
     private static BmobIMApplication INSTANCE;
+    public static SharedPreferences preferences;
     public static BmobIMApplication INSTANCE(){
         return INSTANCE;
     }
@@ -44,6 +47,9 @@ public class BmobIMApplication extends Application{
         }
         //uil初始化
         UniversalImageLoader.initImageLoader(this);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//        preferences = getSharedPreferences("huahai", Context.MODE_PRIVATE);
     }
 
     /**

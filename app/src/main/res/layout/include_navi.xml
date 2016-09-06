@@ -21,12 +21,11 @@
         <ImageView
             android:id="@+id/tv_left"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingRight="@dimen/margin_5"
-            android:paddingLeft="@dimen/margin_10"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/base_action_bar_back_bg_selector"
+            android:background="@drawable/base_action_bar_back_bg_selector"
             />
 
         <TextView
@@ -47,12 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:paddingTop="@dimen/margin_5"
-            android:paddingBottom="@dimen/margin_5"
-            android:paddingLeft="@dimen/margin_5"
-            android:paddingRight="@dimen/margin_5"
             android:gravity="center"
-            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_10"
             android:layout_centerVertical="true"
             android:textColor="@color/base_color_text_white"
             android:textSize="@dimen/text_size_medium" />

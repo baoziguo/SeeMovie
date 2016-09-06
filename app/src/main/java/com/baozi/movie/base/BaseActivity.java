@@ -166,6 +166,16 @@ public class BaseActivity extends FragmentActivity {
     }
 
     /**
+     * 右侧按钮 by：baozi
+     * @param listener
+     */
+    protected void showRightButton(int resourceId, View.OnClickListener listener){//
+        TextView tv_right = (TextView) findViewById(R.id.tv_right);
+        tv_right.setOnClickListener(listener);
+        tv_right.setBackgroundResource(resourceId);
+    }
+
+    /**
      * 左侧图标替换按钮 by：baozi
      * @param resourceId
      * @param listener

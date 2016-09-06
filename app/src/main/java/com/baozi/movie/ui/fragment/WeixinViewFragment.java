@@ -9,17 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.baozi.movie.adapter.WeiXinAdapter;
 import com.baozi.movie.base.HeaderViewPagerFragment;
 import com.baozi.movie.bean.weiXin;
 import com.baozi.seemovie.R;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class WeixinViewFragment extends HeaderViewPagerFragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -92,7 +94,7 @@ public class WeixinViewFragment extends HeaderViewPagerFragment implements Swipe
                 allList.addAll(weiXinList);
                 if (mAdapter == null) {
                     mAdapter = new WeiXinAdapter(getActivity(), allList);
-                    mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mAdapter));
+                    mRecyclerView.setAdapter(mAdapter);
                 } else {
                     if (weiXinList.isEmpty()){
                         Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();

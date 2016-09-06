@@ -8,23 +8,31 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.base.HeaderViewPagerFragment;
+import com.baozi.movie.ui.fragment.ChatTimeFragment;
 import com.baozi.movie.ui.fragment.TumblrViewFragment;
 import com.baozi.movie.ui.fragment.WeixinViewFragment;
+import com.baozi.movie.ui.weight.ResideLayout;
 import com.baozi.movie.util.StatusBarUtil;
 import com.baozi.movie.util.Utils;
 import com.baozi.seemovie.R;
 import com.lzy.widget.HeaderViewPager;
 import com.lzy.widget.tab.CircleIndicator;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity {
 
@@ -43,9 +51,16 @@ public class HomeActivity extends BaseActivity {
     View titleBar;
     @Bind(R.id.back)
     ImageView back;
+    @Bind(R.id.residelayout)
+    ResideLayout residelayout;
+    @Bind(R.id.lv)
+    ListView lv;
     private View titleBar_Bg;
     private TextView titleBar_title;
     private View status_bar_fix;
+    private String[] strs = new String[] {
+        "聊天", "开服监控", "设置", "瞎鸡巴命名", "我也不知道"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +73,7 @@ public class HomeActivity extends BaseActivity {
         fragments.add(TumblrViewFragment.newInstance());
         fragments.add(WeixinViewFragment.newInstance());
         fragments.add(TumblrViewFragment.newInstance());
+        fragments.add(ChatTimeFragment.newInstance());
 //        fragments.add(RecyclerViewFragment.newInstance());
 //        fragments.add(WebViewFragment.newInstance());
 
@@ -80,9 +96,14 @@ public class HomeActivity extends BaseActivity {
         viewPager.setAdapter(new ContentAdapter(getSupportFragmentManager()));
         tabs.setViewPager(viewPager);
         scrollableLayout.setCurrentScrollableContainer(fragments.get(0));
+        residelayout.isFlag = false;
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                if (position == 0)
+                    residelayout.isFlag = false;
+                else
+                    residelayout.isFlag = true;
                 scrollableLayout.setCurrentScrollableContainer(fragments.get(position));
             }
         });
@@ -101,6 +122,9 @@ public class HomeActivity extends BaseActivity {
             }
         });
         viewPager.setCurrentItem(0);
+
+        lv.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, strs));
     }
 
     @Override
@@ -115,6 +139,17 @@ public class HomeActivity extends BaseActivity {
         scrollableLayout.setTopOffset(titleBar.getHeight());
     }
 
+    @OnClick(R.id.back)
+    public void onClick() {
+        if (back.getVisibility() == View.VISIBLE){
+            if (residelayout.isOpen()){
+                residelayout.closePane();
+            }else{
+                residelayout.openPane();
+            }
+        }
+    }
+
     /**
      * 内容页的适配器
      */
@@ -124,7 +159,7 @@ public class HomeActivity extends BaseActivity {
             super(fm);
         }
 
-        public String[] titles = new String[]{"B站视频", "微信文章", "小电影?"};
+        public String[] titles = new String[]{"B站视频", "扒一扒", "小电影?", "聊一聊"};
 
         @Override
         public CharSequence getPageTitle(int position) {
