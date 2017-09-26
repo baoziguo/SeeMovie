@@ -53,8 +53,9 @@ public class BaseActivity extends FragmentActivity {
     }
 
     public void setStatusState(int color) {
-        if (Build.VERSION.SDK_INT == 19)
-            StatusBarUtil.setColor(this, color, 0);
+        if (Build.VERSION.SDK_INT >= 19)
+            StatusBarUtil.setTransparent(this);
+//            StatusBarUtil.setColor(this, color, 0);
     }
 
     @Override
@@ -151,9 +152,10 @@ public class BaseActivity extends FragmentActivity {
      * 设置title
      * @param title
      */
-    protected void setTitle(String title){//设置title
+    protected TextView setTitle(String title){//设置title
         TextView tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText(title);
+        return tv_title;
     }
 
     /**
@@ -173,6 +175,16 @@ public class BaseActivity extends FragmentActivity {
         TextView tv_right = (TextView) findViewById(R.id.tv_right);
         tv_right.setOnClickListener(listener);
         tv_right.setBackgroundResource(resourceId);
+    }
+
+    /**
+     * 右侧按钮 by：baozi
+     * @param listener
+     */
+    protected void showRightTextButton(String content, View.OnClickListener listener){//
+        TextView tv_right = (TextView) findViewById(R.id.tv_right);
+        tv_right.setOnClickListener(listener);
+        tv_right.setText(content);
     }
 
     /**

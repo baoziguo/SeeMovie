@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <cn.carbs.android.avatarimageview.library.AvatarImageView
+        android:id="@+id/iv_head"
+        app:aiv_BoarderColor="@color/text_gray"
+        app:aiv_BoarderWidth="1dp"
+        app:aiv_ShowBoarder="true"
+        app:aiv_TextSizeRatio="0.4"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerVertical="true"
+        android:padding="5dp"
+        android:src="@mipmap/head" />
+</LinearLayout>

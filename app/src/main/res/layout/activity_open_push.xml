@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/include_navi" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/monitoring_bg"/>
+
+        <LinearLayout
+            android:id="@+id/ll_bg"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/shape_edit_monitor_bg">
+
+            <EditText
+                android:id="@+id/et_put_push_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@null"
+                android:textColor="@color/base_color_text_white"
+                android:hint="可以输入推送内容哦~"
+                android:textColorHint="@color/gray_F5F5F5"
+                android:textSize="12sp">
+            </EditText>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_open_push"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/ll_bg"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/sel_btnbg_monitor"
+            android:gravity="center"
+            android:text="推送"
+            android:textColor="@color/base_color_text_white"
+            android:textSize="16.5sp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

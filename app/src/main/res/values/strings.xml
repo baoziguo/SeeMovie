@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">花海</string>
+    <string name="app_name">圣兽潭</string>
     <string name="action_settings">Settings</string>
     <string name="login_username_hint">请输入用户名&#8230;</string>
     <string name="login_password_hint">请输入密码&#8230;</string>
@@ -53,4 +53,320 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="next">NEXT</string>
 
+    <string name="tab1">首页</string>
+    <string name="tab2">版块</string>
+    <string name="tab3">p圈</string>
+    <string name="tab4">我</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="feed_detail">feed详情页面</string>
+    <string name="msg">进入友盟社区</string>
+    <string name="user_info">用户信息页面</string>
+    <string name="search_topic">话题搜索</string>
+    <string name="select_location">话题搜索</string>
+    <string name="follow_topic">话题搜索</string>
+
+    <!-- 运行时权限 -->
+    <string name="help">帮助</string>
+    <string name="permissions_help">帮助</string>
+    <string name="permissions_quit">退出</string>
+    <string name="permissions_settings">设置</string>
+    <string name="permissions_string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+
+    <string name="label_activity_main">百度贴吧(自动检测)签到插件</string>
+
+
+    <!-- “添加任务”的弹出窗口上显示的插件名称 -->
+    <string name="cfg_plugin_name">百度贴吧(自动检测)</string>
+
+    <!-- 插件作者 -->
+    <string name="cfg_author">家前李树</string>
+
+    <!-- “添加任务”的弹出窗口上显示的说明信息，提示用户怎么使用此插件 -->
+    <string name="cfg_info">程序会自动检测并签到所有已经“喜欢”的贴吧，请注意不是“经常去的贴吧”，而是已经“喜欢”的贴吧。此任务每项设置都非常重要，请仔细阅读说明进行配置。</string>
+
+    <!--
+    在“添加任务”的弹出窗口上显示的“配置”界面类型
+    0表示不需要显示显示任何配置界面
+    1表示直接由主程序提供一个简单的文本框来让用户输入数据
+    2表示由插件自己来完成配置界面的高级定制
+    -->
+    <string name="cfg_config_type">2</string>
+
+    <!-- 该任务每日可签到的次数 -->
+    <string name="cfg_times">1</string>
+
+    <!--首页的标题-->
+    <string name="title_activity_main">首页</string>
+
+    <!--首页右上角按钮的字符串-->
+    <string name="add">添加账号</string>
+    <string name="title_activity_login">添加百度账号</string>
+
+    <!-- 登录界面字符串 -->
+    <string name="prompt_account">手机/邮箱/用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="error_invalid_account">账号不能为空</string>
+    <string name="error_invalid_password">密码不能为空</string>
+    <string name="error_login_fail">登录失败</string>
+
+    <!--设置界面字符串-->
+    <string name="title_activity_settings">设置</string>
+    <string name="pref_title_auto_sign">自动签到</string>
+    <string name="pref_title_time_sign">签到时间</string>
+    <string name="pref_title_notifications">签到后通知栏提醒</string>
+    <string name="pref_title_ringtone">通知铃声</string>
+    <string name="pref_ringtone_silent">静音</string>
+
+    <!--执行与贴吧相关操作时的字符串-->
+    <string name="error_get_tieba_fail">获取贴吧列表失败</string>
+    <string name="get_tieba_success">获取贴吧列表成功</string>
+
+    <!--签到状态字符串-->
+    <string name="sign_status_success">是</string>
+    <string name="sign_status_error">否</string>
+    <string name="sign_status_unknow">未知</string>
+
+    <string-array name="service">
+        <item>天下归一</item>
+        <item>双剑合璧</item>
+        <item>日月凌空</item>
+        <item>比翼齐飞</item>
+        <item>四海一家</item>
+        <item>风雷刀谷</item>
+        <item>长安城</item>
+        <item>龙争虎斗</item>
+        <item>神龙摆尾</item>
+        <item>海誓山盟</item>
+        <item>幽雨坪</item>
+        <item>翠烟山</item>
+        <item>逍遥林</item>
+        <item>枫华谷</item>
+        <item>义薄云天</item>
+        <item>晴昼海</item>
+        <item>金水镇</item>
+        <item>昆仑</item>
+        <item>扬州城</item>
+        <item>巴陵县</item>
+        <item>南屏山</item>
+        <item>洛道</item>
+        <item>洛阳城</item>
+        <item>龙门荒漠</item>
+        <item>萍踪侠影</item>
+        <item>独步天下</item>
+        <item>夜幕星河</item>
+        <item>白帝城</item>
+        <item>荻花宫</item>
+        <item>风花雪月</item>
+        <item>群英汇</item>
+        <item>壮志凌云</item>
+        <item>逍遥游</item>
+        <item>枫林如火</item>
+        <item>华清池</item>
+        <item>追风蹑景</item>
+        <item>傲视天地</item>
+        <item>步莲台</item>
+        <item>天子峰</item>
+        <item>落星湖</item>
+        <item>空雾峰</item>
+        <item>天工坊</item>
+        <item>灵霄峡</item>
+        <item>日轮山城</item>
+        <item>云湖天池</item>
+        <item>上陵苑</item>
+        <item>三才阵</item>
+        <item>无盐岛</item>
+        <item>紫微山</item>
+        <item>演武场</item>
+        <item>英雄擂</item>
+        <item>浮光掠影</item>
+        <item>肝胆相照</item>
+        <item>侠骨丹心</item>
+        <item>相知莫问</item>
+        <item>秀明尘身</item>
+        <item>秦王殿</item>
+        <item>金蛇漫舞</item>
+        <item>微山书院</item>
+        <item>比翼双飞</item>
+        <item>出神入化</item>
+        <item>双狼之战</item>
+        <item>鹤舞九霄</item>
+        <item>战魂劫</item>
+        <item>大雄宝殿</item>
+        <item>天王殿</item>
+        <item>敬德楼</item>
+        <item>血龙出渊</item>
+        <item>凌烟阁</item>
+        <item>达摩院</item>
+        <item>太极广场</item>
+        <item>纯阳宫</item>
+        <item>落雁峰</item>
+        <item>青萝山</item>
+        <item>无极道场</item>
+        <item>忆盈楼</item>
+        <item>三星望月</item>
+        <item>飞星遁影</item>
+        <item>忆青春</item>
+        <item>日月明尊</item>
+        <item>蝶恋花</item>
+        <item>沁园春</item>
+        <item>初心不泯</item>
+        <item>厉兵秣马</item>
+        <item>登萍渡水</item>
+        <item>叱咤风云</item>
+        <item>策马江湖</item>
+        <item>潜龙勿用</item>
+        <item>惊鸿游龙</item>
+        <item>龙腾虎跃</item>
+        <item>千机阁</item>
+        <item>飞骏谷</item>
+        <item>虎牢关</item>
+        <item>六祖台</item>
+        <item>午阳岗</item>
+        <item>战江湖</item>
+        <item>藏经阁</item>
+        <item>饮马川</item>
+        <item>轩辕台</item>
+        <item>知节殿</item>
+        <item>论剑峰</item>
+        <item>少室山</item>
+        <item>燕子坞</item>
+        <item>思过崖</item>
+        <item>山河齐颂</item>
+        <item>平步青云</item>
+        <item>千岛湖</item>
+        <item>金榜题名</item>
+        <item>唯我独尊</item>
+        <item>梦江南</item>
+        <item>幽月轮</item>
+        <item>乾坤一掷</item>
+        <item>斗转星移</item>
+        <item>剑胆琴心</item>
+        <item>山雨欲来</item>
+        <item>笑傲江湖</item>
+        <item>圣墓山</item>
+        <item>风雨同舟</item>
+        <item>金戈铁马</item>
+        <item>枫泾古镇</item>
+        <item>华山论剑</item>
+        <item>满江红</item>
+        <item>侠客行</item>
+        <item>如梦令</item>
+        <item>名扬四海</item>
+        <item>红尘寻梦</item>
+        <item>名动江湖</item>
+        <item>春和景明</item>
+        <item>气吞山河</item>
+        <item>天马行空</item>
+        <item>天佑中华</item>
+        <item>烈日斩</item>
+        <item>众志成城</item>
+        <item>鹰击长空</item>
+        <item>天女散花</item>
+        <item>英雄结义</item>
+        <item>国色天香</item>
+        <item>倾国倾城</item>
+        <item>剑指龙城</item>
+        <item>大圣归来</item>
+        <item>一苇渡江</item>
+        <item>情深似海</item>
+        <item>仙侣庭园</item>
+        <item>雪月天枪</item>
+        <item>破茧成蝶</item>
+        <item>恋青春</item>
+        <item>光明顶</item>
+        <item>不归海</item>
+        <item>圣火令</item>
+        <item>乱世长安</item>
+        <item>快意恩仇</item>
+        <item>风骨霸刀</item>
+        <item>百家争鸣</item>
+        <item>暗香掠影</item>
+        <item>引仙水榭</item>
+        <item>亢龙有悔</item>
+        <item>绝代天骄</item>
+        <item>战无不胜</item>
+        <item>星河清梦</item>
+        <item>龙飞凤舞</item>
+        <item>梦回大唐</item>
+        <item>侠骨柔情</item>
+        <item>致青春</item>
+        <item>双龙取水</item>
+        <item>见龙在田</item>
+        <item>大明宫</item>
+        <item>武林同庆</item>
+        <item>松烟竹雾</item>
+        <item>飞龙在天</item>
+        <item>李忘生</item>
+        <item>叶芷青</item>
+        <item>天长地久</item>
+        <item>楼台烟雨</item>
+        <item>无悔江湖</item>
+        <item>登峰造极</item>
+        <item>飞凤涅磐</item>
+        <item>铁血丹心</item>
+        <item>赞青春</item>
+        <item>跃马扬鞭</item>
+        <item>银枪暮雪</item>
+        <item>西京烟雨</item>
+        <item>黑云压城</item>
+        <item>君山岛</item>
+        <item>荡气回肠</item>
+        <item>银蛇献瑞</item>
+        <item>龙战于野</item>
+        <item>往生涧</item>
+        <item>金风飒飒</item>
+        <item>万马奔腾</item>
+        <item>醉舞狂歌</item>
+        <item>情深意重</item>
+        <item>王昌龄</item>
+        <item>谁与争锋</item>
+        <item>林白轩</item>
+        <item>高绛婷</item>
+        <item>玄正</item>
+        <item>王维</item>
+        <item>柳风骨</item>
+        <item>李承恩</item>
+        <item>谢云流</item>
+        <item>李白</item>
+        <item>杜甫</item>
+        <item>卧虎藏龙</item>
+        <item>唐简</item>
+        <item>七侠五义</item>
+        <item>孟浩然</item>
+        <item>吕洞宾</item>
+        <item>公孙幽</item>
+        <item>歃血为盟</item>
+        <item>于睿</item>
+        <item>僧一行</item>
+        <item>东方宇轩</item>
+        <item>叶孟秋</item>
+        <item>杨宁</item>
+        <item>点墨山河</item>
+        <item>天罗地网</item>
+        <item>暴雨梨花</item>
+        <item>琴瑟和鸣</item>
+        <item>缘定三生</item>
+        <item>乱世争锋</item>
+        <item>行者无疆</item>
+        <item>花月别院</item>
+        <item>百转千回</item>
+        <item>雪絮金屏</item>
+        <item>飞鸢泛月</item>
+        <item>五台山</item>
+        <item>破阵子</item>
+        <item>天鹅坪</item>
+        <item>鱼跃龙门</item>
+        <item>穆如清风</item>
+        <item>侠肝义胆</item>
+        <item>君子如风</item>
+        <item>攻无不克</item>
+        <item>碧血忠魂</item>
+        <item>时乘六龙</item>
+        <item>纵横江湖</item>
+        <item>步月登云</item>
+        <item>念奴娇</item>
+        <item>行云流水</item>
+    </string-array>
 </resources>

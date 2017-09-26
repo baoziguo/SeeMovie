@@ -7,8 +7,14 @@
 
     <color name="base_color_text_black">#3e3e39</color>
     <color name="base_color_text_gray">#9fa0a0</color>
+    <color name="gray_F5F5F5">#F5F5F5</color>
+    <color name="gray_EDECEC">#EDECEC</color>
     <color name="base_color_text_white">#ffffff</color>
     <color name="color_theme">#489cfa</color>
+    <color name="grey_9b9b9b">#9b9b9b</color>
+    <color name="grey_F0F0F0">#F0F0F0</color>
+    <color name="violet_e06627A2">#e06627A2</color>
+    <color name="blue_9BD04A">#9BD04A</color>
 
     <color name="color_emote_divder">#ffa1a1a1</color>
     <color name="color_bottom_bg">#272a2e</color>
@@ -16,8 +22,6 @@
     <color name="color_bottom_text_press">#4f9ef6</color>
     <color name="text_gray">#969696</color>
     <color name="msg_chat_bg">#eceff4</color>
-
-    <color name="grey">#f5f5f5</color>
 
     <color name="theme_bg_color">#f0f2f5</color>
     <color name="c_f98800">#ed4e23</color>

@@ -1,0 +1,339 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+#bpush
+
+
+#-dontskipnonpubliclibraryclasses
+-verbose
+
+-dontoptimize
+-dontpreverify
+
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+#保护注解
+-keepattributes Annotation
+# 保持哪些类不被混淆
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+#-keep public class * com.android.vending.licensing.ILicensingService
+#如果有引用v4包可以添加下面这行
+-keep public class * extends android.support.v4.app.Fragment
+#忽略警告
+-ignorewarning
+
+-keepclassmembers public class * extends android.view.View {
+   void set*(***);
+   *** get*();
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+-keep public class * implements java.io.Serializable{
+ public protected private *;
+}
+
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+-dontwarn android.support.**
+-dontwarn com.google.android.maps.**
+-dontwarn android.webkit.WebView
+-dontwarn com.umeng.**
+-dontwarn com.tencent.weibo.sdk.**
+-dontwarn com.facebook.**
+-keep enum com.facebook.**
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+
+-keep public interface com.facebook.**
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
+
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+
+-keep class com.facebook.**
+-keep class com.umeng.scrshot.**
+-keep public class com.tencent.** {*;}
+-keep class com.umeng.socialize.sensor.**
+-keep class com.umeng.** {*;}
+-keep class com.tencent.mm.sdk.openapi.WXMediaMessage {*;}
+
+-keep class com.tencent.mm.sdk.openapi.** implements com.tencent.mm.sdk.openapi.WXMediaMessage$IMediaObject {*;}
+
+-keep class im.yixin.sdk.api.YXMessage {*;}
+-keep class im.yixin.sdk.api.** implements im.yixin.sdk.api.YXMessage$YXMessageData{*;}
+-dontwarn com.jh.**
+-keep class com.jh.**{
+    *;
+}
+
+-dontwarn com.hsg.sdk.common.**
+-keep class com.hsg.sdk.common.**{
+    *;
+}
+#-----------------------
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontpreverify
+-verbose
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+
+-keep public class * extends android.app.Activity  
+-keepclasseswithmembers public class com.baozi.movie.ui.**{*;}
+-keep public class * extends android.app.Application {*;}
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver  
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+#abort jar
+-ignorewarnings
+#-libraryjars libs/android-support-v4.jar
+#-libraryjars libs/commonlibs.jar
+#-libraryjars libs/gson-2.2.4.jar
+#-libraryjars libs/jhapi.jar
+#-libraryjars libs/nineoldandroids-2.4.0.jar
+#-libraryjars libs/SocialSDK_sms.jar
+#-libraryjars libs/SocialSDK_WeiXin_1.jar
+#-libraryjars libs/SocialSDK_WeiXin_2.jar
+#-libraryjars libs/umeng_social_sdk.jar
+#-libraryjars libs/umeng-analytics-v5.2.3.jar
+#-libraryjars libs/universal-image-loader-1.9.5.jar
+#-libraryjars libs/xUtils-2.6.14.jar
+#-libraryjars libs/SocialSDK_QQZone_1.jar
+#-libraryjars libs/SocialSDK_QQZone_2.jar
+#-libraryjars libs/SocialSDK_QQZone_3.jar
+#-libraryjars libs/httpmime-4.1.3.jar
+#-libraryjars libs/commons-codec.jar
+#-libraryjars libs/encode.jar
+#-libraryjars libs/commons-codec.jar
+#-libraryjars libs/pushservice-4.2.0.63.jar
+#-libraryjars libs/SocialSDK_tencentWB_1.jar
+#-libraryjars libs/SocialSDK_tencentWB_2.jar
+#-libraryjars libs/SocialSDK_tencentWB_3.jar
+#-libraryjars libs/android-support-v4.jar
+#-libraryjars libs/Bmob_Push_V1.0.0beta_20160627.jar
+
+-keep class android.support.v4.view.** {*;}
+-keep class com.lidroid.**{*;}  
+-keep class cn.bmob.push.**{*;}
+-keep class * extends java.lang.annotation.Annotation {*;}
+-keep class com.baidu.**{*;} 
+-keep class com.tencent.weibo.sdk.adnroid.**{*;}
+-keep class com.umeng.socialize.sso.**{*;}
+-keep class com.umeng.socialize.** {*;}
+-keep class com.google.gson.** {*;}
+-keep class com.nineoldandroids.**{*;}
+-keep class com.nostra13.universalimageloader.**{*;}
+-keep class cn.bmob.newim.**{*;}
+
+# baozi
+-keep class com.baozi.movie.db.**{*;}
+-keep class com.baozi.movie.model.**{*;}
+-keep class com.baozi.movie.bean.**{*;}
+-keep class com.baozi.movie.db.dao.DaoMaster{*;}
+-keep class com.baozi.movie.db.dao.DaoSession{*;}
+-keep class com.baozi.movie.db.dao.NewFriendDao{*;}
+-keep class com.baozi.movie.DemoMessageHandler{*;}
+
+#神坑，混淆搞了我大半天，问题出在greendao上，不dontwarn，特么的打开app就挂
+-dontwarn de.greenrobot.dao.**
+-keep class de.greenrobot.dao.** {*;}
+-keepclassmembers class * extends de.greenrobot.dao.AbstractDao {
+    public static Java.lang.String TABLENAME;
+}
+-keep class **$Properties
+
+-keep class data.db.dao.*$Properties {
+    public static <fields>;
+}
+-keepclassmembers class data.db.dao.** {
+    public static final <fields>;
+  }
+
+-dontwarn com.baidu.**
+-dontwarn com.umeng.socialize.**
+-dontwarn com.google.gson.**
+-dontwarn com.tencent.weibo.sdk.android.**
+-dontwarn com.umeng.socialize.sso.**
+
+-keep public class * implements java.io.Serializable{
+ public protected private *;
+}
+-keepclassmembers class * extends android.app.Activity {                                   
+   public void *(android.view.View);  
+}  
+-keepclasseswithmembers class * {                                                                    
+    public <init>(android.content.Context, android.util.AttributeSet);  
+}  
+-keepclasseswithmembers class * {  
+    public <init>(android.content.Context, android.util.AttributeSet, int);  
+}  
+
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep public class * extends android.widget.BaseAdapter {*;}
+#-dontwarn de.greenrobot.**
+#-keep class de.greenrobot.** {*;}
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+# rxjava
+-dontwarn sun.misc.*
+-keepclassmembers class rx.internal.util.unsafe.ArrayQueueField {
+ long producerIndex;
+ long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# EventBus 混淆
+-keepclassmembers class ** {
+    public void onEvent*(***);
+}
+
+# Only required if you use AsyncExecutor
+#-keepclassmembers class * extends de.greenrobot.event.util.ThrowableFailureEvent {
+#    <init>(java.lang.Throwable);
+#}
+
+-ignorewarnings
+
+-keepattributes Signature,*Annotation*
+
+# keep BmobSDK
+-dontwarn cn.bmob.v3.**
+-keep class cn.bmob.v3.** {*;}
+
+# 确保JavaBean不被混淆-否则gson将无法将数据解析成具体对象
+-keep class * extends cn.bmob.v3.BmobObject {
+    *;
+}
+-keep class com.example.bmobexample.bean.BankCard{*;}
+-keep class com.example.bmobexample.bean.GameScore{*;}
+-keep class com.example.bmobexample.bean.MyUser{*;}
+-keep class com.example.bmobexample.bean.Person{*;}
+-keep class com.example.bmobexample.file.Movie{*;}
+-keep class com.example.bmobexample.file.Song{*;}
+-keep class com.example.bmobexample.relation.Post{*;}
+-keep class com.example.bmobexample.relation.Comment{*;}
+-keep class com.baozi.movie.model.BaseModel{*;}
+-keep class com.baozi.movie.model.UserModel{*;}
+-keep class com.baozi.movie.Config{*;}
+-keep class com.baozi.movie.bean.AddFriendMessage{*;}
+-keep class com.baozi.movie.bean.AgreeAddFriendMessage{*;}
+-keep class com.baozi.movie.bean.Comment{*;}
+-keep class com.baozi.movie.bean.Conversation{*;}
+-keep class com.baozi.movie.bean.HaiManChaoMi{*;}
+-keep class com.baozi.movie.bean.ImageBean{*;}
+-keep class com.baozi.movie.bean.kePao{*;}
+-keep class com.baozi.movie.bean.Monitor{*;}
+-keep class com.baozi.movie.bean.NewFriendConversation{*;}
+-keep class com.baozi.movie.bean.Post{*;}
+-keep class com.baozi.movie.bean.PrivateConversation{*;}
+-keep class com.baozi.movie.bean.User{*;}
+-keep class com.baozi.movie.bean.weiXin{*;}
+
+# keep BmobPush
+-dontwarn  cn.bmob.push.**
+-keep class cn.bmob.push.** {*;}
+
+# keep okhttp3、okio
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *;}
+-keep interface okhttp3.** { *; }
+-dontwarn okio.**
+
+# keep rx
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+ long producerIndex;
+ long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# 如果你需要兼容6.0系统，请不要混淆org.apache.http.legacy.jar
+-dontwarn android.net.compatibility.**
+-dontwarn android.net.http.**
+-dontwarn com.android.internal.http.multipart.**
+-dontwarn org.apache.commons.**
+-dontwarn org.apache.http.**
+-keep class android.net.compatibility.**{*;}
+-keep class android.net.http.**{*;}
+-keep class com.android.internal.http.multipart.**{*;}
+-keep class org.apache.commons.**{*;}
+-keep class org.apache.http.**{*;}
+
+# ijkplayer
+-dontwarn com.dou361.ijkplayer.**
+-keep class com.dou361.ijkplayer.**{*;}
+-keep class com.dou361.**{*;}
+-keep class tv.danmaku.ijk.media.player.**{*;}

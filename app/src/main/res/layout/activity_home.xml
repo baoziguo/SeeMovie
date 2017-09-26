@@ -47,11 +47,27 @@
                 <com.lzy.widget.tab.CircleIndicator
                     android:id="@+id/ci"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="16dp"
                     android:layout_alignParentBottom="true"
                     android:background="#4000"
                     app:ci_normalRadiusColor="#FFF"
                     app:ci_selectedRadiusColor="#FFF" />
+
+                <com.ogaclejapan.smarttablayout.SmartTabLayout
+                    android:id="@+id/tab_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/transparent"
+                    app:stl_customTabTextLayoutId="@layout/custom_tab"
+                    app:stl_customTabTextViewId="@+id/custom_text"
+                    app:stl_distributeEvenly="true"
+                    app:stl_dividerColor="@color/transparent"
+                    app:stl_indicatorColor="@color/colorPrimary"
+                    app:stl_indicatorCornerRadius="1.5dp"
+                    app:stl_indicatorInterpolation="smart"
+                    app:stl_indicatorThickness="3dp"
+                    app:stl_underlineColor="@color/transparent" />
             </RelativeLayout>
 
             <!--<com.lzy.widget.tab.PagerSlidingTabStrip-->
@@ -66,20 +82,6 @@
             <!--app:pstsShouldExpand="false"-->
             <!--app:pstsTextAllCaps="false"-->
             <!--app:pstsUnderlineHeight="2dp" />-->
-            <com.ogaclejapan.smarttablayout.SmartTabLayout
-                android:id="@+id/tab_view"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/base_color_text_white"
-                app:stl_customTabTextLayoutId="@layout/custom_tab"
-                app:stl_customTabTextViewId="@+id/custom_text"
-                app:stl_distributeEvenly="true"
-                app:stl_dividerColor="@color/transparent"
-                app:stl_indicatorColor="@color/colorPrimary"
-                app:stl_indicatorCornerRadius="1.5dp"
-                app:stl_indicatorInterpolation="smart"
-                app:stl_indicatorThickness="3dp"
-                app:stl_underlineColor="@color/transparent" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPager"

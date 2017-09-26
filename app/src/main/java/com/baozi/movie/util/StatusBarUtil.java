@@ -408,7 +408,7 @@ public class StatusBarUtil {
      * @param context context
      * @return 状态栏高度
      */
-    private static int getStatusBarHeight(Context context) {
+    public static int getStatusBarHeight(Context context) {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return context.getResources().getDimensionPixelSize(resourceId);
@@ -449,5 +449,27 @@ public class StatusBarUtil {
             vmlp.setMargins(0, -getStatusBarHeight(act), 0, 0);
         }
     }
+
+    /**
+     * 给首页设置透明状态栏，其它带颜色
+     */
+    public static void setTransparentColor(Activity activity, int color, int statusBarAlpha) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            activity.getWindow().setStatusBarColor(calculateStatusColor(color, statusBarAlpha));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+            if (decorView.getChildCount() > 0 && decorView.getChildAt(0) instanceof StatusBarView) {
+                decorView.getChildAt(0).setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
+            } else {
+                StatusBarView statusView = createStatusBarView(activity, color, statusBarAlpha);
+                decorView.addView(statusView, 0);
+            }
+        }
+
+    }
+
 }
 

@@ -5,11 +5,13 @@
     tools:context="com.baozi.movie.ui.SplashActivity">
 
     <ImageView
+        android:id="@+id/iv_splash"
         android:layout_centerInParent="true"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:scaleType="fitXY"
-        android:src="@mipmap/splash"
         />
+    <!--android:src="@mipmap/splash"-->
+
 
 </RelativeLayout>

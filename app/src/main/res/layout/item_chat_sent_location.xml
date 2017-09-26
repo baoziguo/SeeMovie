@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/margin_10"
-    android:paddingTop="@dimen/margin_15" >
+    android:paddingTop="@dimen/margin_15">
 
     <TextView
         android:id="@+id/tv_time"
@@ -21,15 +22,19 @@
         android:layout_marginRight="@dimen/margin_5"
         android:layout_marginTop="@dimen/margin_11" >
 
-        <ImageView
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/height_50"
             android:layout_height="@dimen/height_50"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/margin_5"
-            android:background="@mipmap/head"
-            android:scaleType="fitXY" />
+            android:src="@mipmap/head"
+            android:scaleType="fitXY"
+            app:aiv_BoarderWidth="1dp"
+            app:aiv_ShowBoarder="true"
+            app:aiv_BoarderColor="@color/text_gray"
+            app:aiv_TextSizeRatio="0.4"/>
 
          <LinearLayout
             android:id="@+id/layout_location"

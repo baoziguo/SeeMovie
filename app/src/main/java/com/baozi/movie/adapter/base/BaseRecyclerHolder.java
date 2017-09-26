@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.baozi.movie.base.ImageLoaderFactory;
+import com.koushikdutta.ion.Ion;
 
 /**
  * 与BaseRecyclerAdapter一起使用
@@ -117,7 +117,8 @@ public class BaseRecyclerHolder extends RecyclerView.ViewHolder {
      */
     public BaseRecyclerHolder setImageView(String avatar, int defaultRes, int viewId) {
         ImageView iv = getView(viewId);
-        ImageLoaderFactory.getLoader().loadAvator(iv,avatar, defaultRes);
+//        ImageLoaderFactory.getLoader().loadAvator(iv,avatar, defaultRes);
+        Ion.with(iv).load(avatar);
         return this;
     }
 }

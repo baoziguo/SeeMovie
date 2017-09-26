@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:drawable="@drawable/shape_lgoin_pre_btnbg" android:state_pressed="true"></item>
+        <item android:drawable="@drawable/shape_lgoin_pre_btnbg" android:state_focused="true"></item>
+        <item android:drawable="@drawable/shape_lgoin_pre_btnbg" android:state_selected="true"></item>
+        <item android:drawable="@drawable/shape_lgoin_pre_btnbg" android:state_enabled="false"></item>
+        <item android:drawable="@drawable/shape_lgoin_nor_btnbg" android:state_enabled="true"></item>
+        <item android:drawable="@drawable/shape_lgoin_nor_btnbg"></item>
+
+</selector>

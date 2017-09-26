@@ -8,31 +8,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 import com.baozi.movie.adapter.TumblrAdapter;
 import com.baozi.movie.base.HeaderViewPagerFragment;
 import com.baozi.movie.bean.kePao;
+import com.baozi.movie.ui.HomeNewActivity;
 import com.baozi.seemovie.R;
-import java.util.ArrayList;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
-public class TumblrViewFragment extends HeaderViewPagerFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class TumblrViewFragment extends HeaderViewPagerFragment implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @Bind(R.id.swipeToLoadLayout)
     SwipeRefreshLayout swipeToLoadLayout;
+    @Bind(R.id.status_view)
+    View status_view;
     private TumblrAdapter mAdapter;
     private int page = 0;
-    private List<kePao> allList = new ArrayList<>();
     private LinearLayoutManager mLinearLayoutManager;
-    private int pastVisiblesItems, visibleItemCount, totalItemCount;
-    private boolean loading = false;
 
     public static TumblrViewFragment newInstance() {
         return new TumblrViewFragment();
@@ -53,65 +54,48 @@ public class TumblrViewFragment extends HeaderViewPagerFragment implements Swipe
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0) //向下滚动
-                {
-                    visibleItemCount = mLinearLayoutManager.getChildCount();
-                    totalItemCount = mLinearLayoutManager.getItemCount();
-                    pastVisiblesItems = mLinearLayoutManager.findFirstVisibleItemPosition();
-
-                    if (!loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        loading = true;
-                        onLoadMore();
-                    }
-                }
-            }
-        });
         initData(page);
+        ((HomeNewActivity)getActivity()).getHeight(status_view);
     }
 
-    private void initData(int page) {
+    private void initData(int q_page) {
         BmobQuery<kePao> query = new BmobQuery<kePao>();
         //按照时间降序
         query.order("-createdAt");
         //限制最多20条数据结果作为一页
         query.setLimit(20);
         //跳过之前页数并去掉重复数据
-        query.setSkip(page * 20);
+        query.setSkip(q_page * 20);
         //执行查询，第一个参数为上下文，第二个参数为查找的回调
         query.findObjects(getActivity(), new FindListener<kePao>() {
 
             @Override
             public void onSuccess(List<kePao> loveEntity) {
-                if (swipeToLoadLayout.isRefreshing()) {
-                    swipeToLoadLayout.setRefreshing(false);
-                }
-                loading = false;
-                allList.addAll(loveEntity);
-                if (mAdapter == null) {
-                    mAdapter = new TumblrAdapter(getActivity(), allList);
-//                    AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);
-//                    alphaAdapter.setFirstOnly(true);
-//                    alphaAdapter.setDuration(500);
-//                    alphaAdapter.setInterpolator(new OvershootInterpolator(0.5f));
-//                    mRecyclerView.setAdapter(new ScaleInAnimationAdapter(alphaAdapter));
-                    mRecyclerView.setAdapter(new ScaleInAnimationAdapter(mAdapter));
-                } else {
-                    if (loveEntity.isEmpty()){
-                        Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    mAdapter.setmListData(allList);
-                    mAdapter.notifyDataSetChanged();
-                }
+//                allList.addAll(loveEntity);
 
+                if (mAdapter == null) {
+                    mAdapter = new TumblrAdapter(loveEntity);
+                    mAdapter.setOnLoadMoreListener(TumblrViewFragment.this);
+                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    if (swipeToLoadLayout.isRefreshing()) {
+                        mAdapter.setNewData(loveEntity);
+                        swipeToLoadLayout.setRefreshing(false);
+                        mAdapter.setEnableLoadMore(true);
+                    }else if (mAdapter.isLoading()){
+                        mAdapter.addData(loveEntity);
+                        mAdapter.loadMoreComplete();
+                        swipeToLoadLayout.setEnabled(true);
+                    }else if (loveEntity.isEmpty()){
+                        mAdapter.loadMoreEnd();
+                    }
+                }
             }
 
             @Override
             public void onError(int code, String arg0) {
-
+                if (mAdapter != null)
+                    mAdapter.loadMoreFail();
             }
         });
 
@@ -130,12 +114,14 @@ public class TumblrViewFragment extends HeaderViewPagerFragment implements Swipe
 
     @Override
     public void onRefresh() {
-        allList.clear();
+        mAdapter.setEnableLoadMore(false);
         initData(0);
     }
 
-    private void onLoadMore() {
+    @Override
+    public void onLoadMoreRequested() {
         page++;
+        swipeToLoadLayout.setEnabled(false);
         initData(page);
     }
 }

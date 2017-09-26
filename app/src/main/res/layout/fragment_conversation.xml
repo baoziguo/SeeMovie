@@ -6,6 +6,12 @@
     android:background="@color/base_bg"
     android:orientation="vertical" >
 
+    <!--<View-->
+        <!--android:id="@+id/status_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorPrimary"/>-->
+
     <include android:id="@+id/ll" layout="@layout/include_navi"/>
 
     <android.support.v4.widget.SwipeRefreshLayout

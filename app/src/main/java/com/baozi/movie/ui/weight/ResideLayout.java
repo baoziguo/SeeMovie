@@ -1,6 +1,5 @@
 package com.baozi.movie.ui.weight;
 
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -27,11 +26,13 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+/**
+ * 炫酷的侧拉栏
+ */
 public class ResideLayout extends ViewGroup {
     private static final String TAG = "ResideLayout";
 

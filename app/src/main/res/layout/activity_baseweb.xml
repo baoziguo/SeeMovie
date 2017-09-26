@@ -25,27 +25,48 @@
 
     </android.support.design.widget.AppBarLayout>
 
-        <com.liaoinstan.springview.widget.SpringView
-            android:id="@+id/spring_view"
+    <!--<com.liaoinstan.springview.widget.SpringView-->
+    <!--android:id="@+id/spring_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="#797a7d"-->
+    <!--app:header="@layout/header_web"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--app:type="overlap">-->
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#797a7d"
-            app:header="@layout/header_web"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:type="overlap">
+            android:orientation="vertical">
 
-            <android.support.v4.widget.NestedScrollView
-                android:id="@+id/nest"
+            <com.baozi.movie.ui.weight.NumberProgressBar
+                android:id="@+id/progressbar"
+                style="@style/NumberProgressBar_Funny_Orange"
+                android:layout_width="match_parent"
+                app:progress_reached_bar_height="2dp"
+                app:progress_text_size="0sp"
+                app:progress_text_visibility="invisible"
+                app:progress_unreached_bar_height="2dp" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.baozi.movie.ui.weight.ProgressWebView
+                <com.baozi.movie.jsbridgewebview.BridgeWebView
                     android:id="@+id/webview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+            </RelativeLayout>
 
-            </android.support.v4.widget.NestedScrollView>
-        </com.liaoinstan.springview.widget.SpringView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <!--</com.liaoinstan.springview.widget.SpringView>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabButton"

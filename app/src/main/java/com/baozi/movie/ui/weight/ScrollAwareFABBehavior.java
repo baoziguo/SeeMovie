@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
+ * 上拉隐藏，下拉显示
  * Created by baozi on 2016/4/15 0015.
  */
 public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {

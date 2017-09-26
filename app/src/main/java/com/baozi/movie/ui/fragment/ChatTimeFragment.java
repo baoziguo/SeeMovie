@@ -1,45 +1,40 @@
 package com.baozi.movie.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.baozi.movie.adapter.ChatTimeAdapter;
+import com.baozi.movie.adapter.ChatTimeNewAdapter;
 import com.baozi.movie.base.HeaderViewPagerFragment;
 import com.baozi.movie.bean.Post;
-import com.baozi.movie.bean.User;
-import com.baozi.movie.bean.weiXin;
+import com.baozi.movie.ui.HomeNewActivity;
+import com.baozi.movie.ui.SendMessageActivity;
+import com.baozi.movie.ui.springactionmenu.ActionMenu;
+import com.baozi.movie.ui.springactionmenu.OnActionItemClickListener;
+import com.baozi.movie.ui.weight.refreshrecyclerview.RefreshRecyclerView;
+import com.baozi.movie.ui.weight.refreshrecyclerview.adapter.Action;
+import com.baozi.movie.util.ToastUtils;
 import com.baozi.seemovie.R;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.SaveListener;
 
-public class ChatTimeFragment extends HeaderViewPagerFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ChatTimeFragment extends HeaderViewPagerFragment {
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-    @Bind(R.id.swipeToLoadLayout)
-    SwipeRefreshLayout swipeToLoadLayout;
-    private ChatTimeAdapter mAdapter;
+    @Bind(R.id.recycler_view)
+    RefreshRecyclerView mRecyclerView;
+    @Bind(R.id.status_view)
+    View status_view;
+    @Bind(R.id.actionMenu)
+    ActionMenu actionMenu;
+
+    private ChatTimeNewAdapter mAdapter;
     private int page = 0;
-    private List<weiXin> allList = new ArrayList<>();
-    private LinearLayoutManager mLinearLayoutManager;
-    private int pastVisiblesItems, visibleItemCount, totalItemCount;
-    private boolean loading = false;
 
     public static ChatTimeFragment newInstance() {
         return new ChatTimeFragment();
@@ -47,7 +42,7 @@ public class ChatTimeFragment extends HeaderViewPagerFragment implements SwipeRe
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.fragment_chattime_recyclerview, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -55,59 +50,71 @@ public class ChatTimeFragment extends HeaderViewPagerFragment implements SwipeRe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        swipeToLoadLayout.setColorSchemeResources(R.color.colorPrimary);
-        swipeToLoadLayout.setOnRefreshListener(this);
-        mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mAdapter = new ChatTimeNewAdapter(getActivity());
+        mRecyclerView.setSwipeRefreshColors(0xFFFF4081,0xFFE44F98,0xFF2FAC21);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setRefreshAction(new Action() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0) //向下滚动
-                {
-                    visibleItemCount = mLinearLayoutManager.getChildCount();
-                    totalItemCount = mLinearLayoutManager.getItemCount();
-                    pastVisiblesItems = mLinearLayoutManager.findFirstVisibleItemPosition();
+            public void onAction() {
+                page = 0;
+                initData(page);
+            }
+        });
 
-                    if (!loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
-                        loading = true;
-                        onLoadMore();
-                    }
-                }
+        mRecyclerView.setLoadMoreAction(new Action() {
+            @Override
+            public void onAction() {
+                initData(page);
             }
         });
         initData(page);
+        ((HomeNewActivity)getActivity()).getHeight(status_view);
+        actionMenu.addView(R.drawable.picture, getItemColor(R.color.violet_e06627A2), getItemColor(R.color.violet_e06627A2));
+        actionMenu.addView(R.drawable.movie, getItemColor(R.color.color_bottom_text_press), getItemColor(R.color.color_bottom_text_press));
+        actionMenu.setItemClickListener(new OnActionItemClickListener() {
+            @Override
+            public void onItemClick(int index) {
+                switch (index){
+                    case 1://图文
+                        startActivity(new Intent(getActivity(), SendMessageActivity.class));
+                        break;
+                    case 2://视频
+                        ToastUtils.showCustomToast("视频");
+                        break;
+                }
+            }
+
+            @Override
+            public void onAnimationEnd(boolean isOpen) {
+
+            }
+        });
     }
 
-    private void initData(int page) {
-        BmobQuery<weiXin> query = new BmobQuery<>();
+    private void initData(int mPage) {
+        BmobQuery<Post> query = new BmobQuery<>();
         //按照时间降序
         query.order("-createdAt");
         //限制最多20条数据结果作为一页
         query.setLimit(20);
+        query.include("author");
         //跳过之前页数并去掉重复数据
-        query.setSkip(page * 20);
+        query.setSkip(mPage * 20);
         //执行查询，第一个参数为上下文，第二个参数为查找的回调
-        query.findObjects(getActivity(), new FindListener<weiXin>() {
+        query.findObjects(getActivity(), new FindListener<Post>() {
 
             @Override
-            public void onSuccess(List<weiXin> weiXinList) {
-                if (swipeToLoadLayout.isRefreshing()) {
-                    swipeToLoadLayout.setRefreshing(false);
+            public void onSuccess(List<Post> weiXinList) {
+                if(page == 1){
+                    mRecyclerView.showNoMore();
+                    return;
                 }
-                loading = false;
-                allList.addAll(weiXinList);
-                if (mAdapter == null) {
-                    mAdapter = new ChatTimeAdapter(getActivity(), allList);
-                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    if (weiXinList.isEmpty()) {
-                        Toast.makeText(getActivity(), "没有更多数据了", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    mAdapter.setmListData(allList);
-                    mAdapter.notifyDataSetChanged();
-                }
+                mAdapter.clear();
+                mAdapter.addAll(weiXinList);
+                mRecyclerView.dismissSwipeRefresh();
+                mRecyclerView.getRecyclerView().scrollToPosition(0);
+                page++;
 
             }
 
@@ -117,6 +124,10 @@ public class ChatTimeFragment extends HeaderViewPagerFragment implements SwipeRe
             }
         });
 
+    }
+
+    private int getItemColor(int colorID) {
+        return getResources().getColor(colorID);
     }
 
     @Override
@@ -130,44 +141,4 @@ public class ChatTimeFragment extends HeaderViewPagerFragment implements SwipeRe
         ButterKnife.unbind(this);
     }
 
-    @Override
-    public void onRefresh() {
-        allList.clear();
-        initData(0);
-    }
-
-    private void onLoadMore() {
-        page++;
-        initData(page);
-    }
-
-    /**
-     * 发表帖子
-     *
-     * @param content 帖子内容
-     */
-    private void sendPost(String content) {
-        User user = BmobUser.getCurrentUser(getActivity(), User.class);
-        // 创建帖子信息
-        Post post = new Post();
-        post.setContent(content);
-        //添加一对一关联
-        post.setAuthor(user);
-        post.save(getActivity(), new SaveListener() {
-            @Override
-            public void onSuccess() {
-                Toast.makeText(getActivity(), "发表成功", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @OnClick(R.id.fabButton)
-    public void onClick() {
-        sendPost("包子大帅哥");
-    }
 }

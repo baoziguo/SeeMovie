@@ -215,7 +215,7 @@
         		android:layout_height="1px"
         		android:layout_marginLeft="16px"
         		android:layout_marginRight="16px"
-        		android:background="@color/grey" />
+        		android:background="@color/gray_F5F5F5" />
 
             <LinearLayout
                 android:id="@+id/act_details_llayout_reply_list"
@@ -251,6 +251,6 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="10px"
-        android:background="@color/grey" />
+        android:background="@color/gray_F5F5F5" />
 
 </LinearLayout>

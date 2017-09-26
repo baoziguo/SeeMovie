@@ -1,0 +1,23 @@
+ {
+    "test_name": "包子",
+    "test_age": "",
+    "test_sex": null,
+    "test_haha": "",
+    "test_hehe": "null"
+  }
+
+ //    try {
+ //        InputStreamReader inputReader = new InputStreamReader( getResources().getAssets().open("config.json") );
+ //        BufferedReader bufReader = new BufferedReader(inputReader);
+ //        String line="";
+ //        String Result="";
+ //        while((line = bufReader.readLine()) != null)
+ //        Result += line;
+ //        TestBean personBean = GsonUtil.GsonToBean(Result, TestBean.class);
+ //        log("Test_name:" + personBean.getTest_name() + ",Test_age:" + personBean.getTest_age()
+ //        + ",Test_sex:" + personBean.getTest_sex() + ",Test_haha:" + personBean.getTest_haha() + ",Test_hehe:" + personBean.getTest_hehe());
+ //        输出---->Test_name:包子,Test_age:,Test_sex:,Test_haha:,Test_hehe:null
+ //        } catch (Exception e) {
+ //        e.printStackTrace();
+ //        }
+

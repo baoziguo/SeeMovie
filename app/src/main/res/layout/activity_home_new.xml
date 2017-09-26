@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jp="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_F5F5F5"
+    android:orientation="vertical">
+
+    <!--<include-->
+        <!--android:id="@+id/titleBar"-->
+        <!--layout="@layout/include_titlebar" />-->
+
+    <!--android:layout_marginTop="50dp"-->
+    <com.baozi.movie.ui.weight.NoScrollViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_F5F5F5"
+        android:layout_marginBottom="48dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_F5F5F5"
+            android:layout_alignParentBottom="true"/>
+
+        <com.jpeng.jptabbar.JPTabBar
+            android:id="@+id/tabbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/base_color_text_white"
+            jp:TabSelectColor="#FF4081"
+            jp:TabIconSize="20dp"
+            jp:TabMargin="10dp"
+            jp:TabTextSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>

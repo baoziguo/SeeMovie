@@ -9,6 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.baozi.movie.adapter.ConversationAdapter;
+import com.baozi.movie.adapter.OnRecyclerViewListener;
+import com.baozi.movie.adapter.base.IMutlipleItem;
+import com.baozi.movie.base.ParentWithNaviActivity;
+import com.baozi.movie.base.ParentWithNaviFragment;
+import com.baozi.movie.bean.Conversation;
+import com.baozi.movie.bean.NewFriendConversation;
+import com.baozi.movie.bean.PrivateConversation;
+import com.baozi.movie.bean.User;
+import com.baozi.movie.db.NewFriend;
+import com.baozi.movie.db.NewFriendManager;
+import com.baozi.movie.event.RefreshEvent;
+import com.baozi.movie.ui.HomeNewActivity;
+import com.baozi.movie.ui.SearchUserActivity;
+import com.baozi.movie.util.IMMLeaks;
+import com.baozi.seemovie.R;
+import com.orhanobut.logger.Logger;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -18,23 +36,15 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.baozi.seemovie.R;
-import com.baozi.movie.adapter.ConversationAdapter;
-import com.baozi.movie.adapter.OnRecyclerViewListener;
-import com.baozi.movie.adapter.base.IMutlipleItem;
-import com.baozi.movie.base.ParentWithNaviActivity;
-import com.baozi.movie.base.ParentWithNaviFragment;
-import com.baozi.movie.bean.Conversation;
-import com.baozi.movie.bean.NewFriendConversation;
-import com.baozi.movie.bean.PrivateConversation;
-import com.baozi.movie.db.NewFriend;
-import com.baozi.movie.db.NewFriendManager;
-import com.baozi.movie.event.RefreshEvent;
-import com.baozi.movie.ui.SearchUserActivity;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;
+import cn.bmob.newim.core.ConnectionStatus;
 import cn.bmob.newim.event.MessageEvent;
 import cn.bmob.newim.event.OfflineMessageEvent;
+import cn.bmob.newim.listener.ConnectListener;
+import cn.bmob.newim.listener.ConnectStatusChangeListener;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
 
 /**会话界面
  * @author :smile
@@ -47,12 +57,14 @@ public class ConversationFragment extends ParentWithNaviFragment {
     RecyclerView rc_view;
     @Bind(R.id.sw_refresh)
     SwipeRefreshLayout sw_refresh;
+    @Bind(R.id.status_view)
+    View status_view;
     ConversationAdapter adapter;
     LinearLayoutManager layoutManager;
 
     @Override
     protected String title() {
-        return "会话";
+        return "小纸条";
     }
 
     @Override
@@ -79,6 +91,28 @@ public class ConversationFragment extends ParentWithNaviFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView =inflater.inflate(R.layout.fragment_conversation, container, false);
+        User user = BmobUser.getCurrentUser(getActivity(),User.class);
+        BmobIM.connect(user.getObjectId(), new ConnectListener() {
+            @Override
+            public void done(String uid, BmobException e) {
+                if (e == null) {
+                    Logger.i("connect success");
+                    //服务器连接成功就发送一个更新事件，同步更新会话及主页的小红点
+                    EventBus.getDefault().post(new RefreshEvent());
+                } else {
+                    Logger.e(e.getErrorCode() + "/" + e.getMessage());
+                }
+            }
+        });
+        //监听连接状态，也可通过BmobIM.getInstance().getCurrentStatus()来获取当前的长连接状态
+        BmobIM.getInstance().setOnConnectStatusChangeListener(new ConnectStatusChangeListener() {
+            @Override
+            public void onChange(ConnectionStatus status) {
+                toast("" + status.getMsg());
+            }
+        });
+        //解决leancanary提示InputMethodManager内存泄露的问题
+        IMMLeaks.fixFocusedViewLeak(getActivity().getApplication());
         initNaviView();
         ButterKnife.bind(this, rootView);
         //单一布局
@@ -105,6 +139,9 @@ public class ConversationFragment extends ParentWithNaviFragment {
         rc_view.setLayoutManager(layoutManager);
         sw_refresh.setEnabled(true);
         setListener();
+        if (getActivity() instanceof HomeNewActivity){
+            ((HomeNewActivity)getActivity()).getHeight(status_view);
+        }
         return rootView;
     }
 

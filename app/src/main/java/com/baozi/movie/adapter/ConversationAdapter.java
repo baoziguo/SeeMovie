@@ -3,19 +3,14 @@ package com.baozi.movie.adapter;
 import android.content.Context;
 import android.view.View;
 
-import java.util.Collection;
-import java.util.List;
-
-import com.baozi.seemovie.R;
 import com.baozi.movie.adapter.base.BaseRecyclerAdapter;
 import com.baozi.movie.adapter.base.BaseRecyclerHolder;
 import com.baozi.movie.adapter.base.IMutlipleItem;
 import com.baozi.movie.bean.Conversation;
 import com.baozi.movie.util.TimeUtil;
-import cn.bmob.newim.BmobIM;
-import cn.bmob.newim.bean.BmobIMConversation;
-import cn.bmob.newim.bean.BmobIMMessage;
-import cn.bmob.newim.bean.BmobIMMessageType;
+import com.baozi.seemovie.R;
+
+import java.util.Collection;
 
 /**
  * 使用进一步封装的Conversation,教大家怎么自定义会话列表

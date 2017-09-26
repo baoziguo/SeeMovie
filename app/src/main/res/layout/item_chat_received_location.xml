@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -21,15 +22,19 @@
         android:layout_marginLeft="@dimen/margin_5"
         android:layout_marginTop="@dimen/margin_11" >
 
-        <ImageView
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/height_50"
             android:layout_height="@dimen/height_50"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_5"
-            android:background="@mipmap/head"
-            android:scaleType="fitXY" />
+            android:src="@mipmap/head"
+            android:scaleType="fitXY"
+            app:aiv_BoarderWidth="1dp"
+            app:aiv_ShowBoarder="true"
+            app:aiv_BoarderColor="@color/text_gray"
+            app:aiv_TextSizeRatio="0.4"/>
 
         <LinearLayout
             android:id="@+id/layout_location"

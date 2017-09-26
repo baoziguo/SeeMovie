@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:background="@drawable/bg_item"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <fm.jiecao.jcvideoplayer.JCVideoPlayer
+        android:id="@+id/videocontroller"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
+            android:id="@+id/iv_head"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@mipmap/head"
+            app:aiv_BoarderWidth="1dp"
+            app:aiv_ShowBoarder="true"
+            app:aiv_BoarderColor="@color/text_gray"
+            app:aiv_TextSizeRatio="0.4"/>
+
+        <TextView
+            android:id="@+id/tv_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一只发霉的包子"/>
+
+        <Button
+            android:id="@+id/btn_download"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="150dp"
+            android:background="@drawable/download"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

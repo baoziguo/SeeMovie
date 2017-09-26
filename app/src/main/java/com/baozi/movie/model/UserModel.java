@@ -2,16 +2,12 @@ package com.baozi.movie.model;
 
 import android.text.TextUtils;
 
-import com.orhanobut.logger.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.baozi.movie.bean.Friend;
 import com.baozi.movie.bean.User;
-import com.baozi.movie.db.NewFriend;
 import com.baozi.movie.model.i.QueryUserListener;
 import com.baozi.movie.model.i.UpdateCacheListener;
+import com.orhanobut.logger.Logger;
+import java.util.List;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMMessage;

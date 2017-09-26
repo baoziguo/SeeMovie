@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_message"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -10,17 +11,20 @@
         android:orientation="horizontal"
         android:minHeight="@dimen/height_message">
 
-        <ImageView
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
             android:id="@+id/iv_recent_avatar"
             android:layout_width="@dimen/height_50"
             android:layout_height="@dimen/height_50"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
             android:layout_marginTop="@dimen/margin_12"
             android:layout_marginBottom="@dimen/margin_12"
             android:layout_marginLeft="@dimen/margin_16"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentLeft="true"
             android:src="@mipmap/head"
-            />
+            app:aiv_BoarderWidth="1dp"
+            app:aiv_ShowBoarder="true"
+            app:aiv_BoarderColor="@color/text_gray"
+            app:aiv_TextSizeRatio="0.4"/>
 
         <LinearLayout
             android:orientation="vertical"

@@ -1,7 +1,6 @@
 package com.baozi.movie.util;
 
 import android.content.SharedPreferences;
-
 import com.baozi.movie.BmobIMApplication;
 
 /**
@@ -9,6 +8,12 @@ import com.baozi.movie.BmobIMApplication;
  */
 public class PreferencesUtil {
 
+    /**
+     * sp存值
+     * @param key
+     * @param value
+     * @param <T>
+     */
     public static <T> void putPreferences(String key, T value) {
         SharedPreferences.Editor editor = BmobIMApplication.preferences.edit();
         if (value instanceof String) {
@@ -25,6 +30,13 @@ public class PreferencesUtil {
         editor.commit();
     }
 
+    /**
+     * sp取值
+     * @param key
+     * @param value
+     * @param <T>
+     * @return
+     */
     public static <T> T getPreferences(String key, T value) {
         Object o = null;
         if (value instanceof String) {
@@ -40,5 +52,12 @@ public class PreferencesUtil {
         }
         T t = (T) o;
         return t;
+    }
+
+    /**
+     * 退出登录，清除用户信息
+     */
+    public void clear(){
+        BmobIMApplication.preferences.edit().clear().apply();
     }
 }

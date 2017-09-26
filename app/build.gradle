@@ -1,24 +1,50 @@
 apply plugin: 'com.android.application'
+apply plugin:'im.fir.plugin.gradle'// 必填
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "25.0.2"
+
+    // 支持httpclient
+    useLibrary 'org.apache.http.legacy'
 
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
 
     defaultConfig {
         applicationId "com.baozi.seemovie"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 2
         versionName "2.0"
+//        multiDexEnabled true
     }
+
+    signingConfigs {
+
+        debug {
+            storeFile file("./keystore/baozi.jks")
+            storePassword "baoziguo"
+            keyAlias "baozi"
+            keyPassword "baoziguo"
+        }
+        release {
+            storeFile file("./keystore/baozi.jks")
+            storePassword "baoziguo"
+            keyAlias "baozi"
+            keyPassword "baoziguo"
+            v2SigningEnabled false
+        }
+    }
+
     buildTypes {
         release {
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
             shrinkResources true
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
             //自动删除 unaligned .apks
             applicationVariants.all { variant ->
                 variant.assemble.doLast {
@@ -33,9 +59,16 @@ android {
                 }
             }
         }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
     }
-    dexOptions{
-        incremental false
+    dexOptions {
+//        incremental false
 //        javaMaxHeapSize "4g"
 //        preDexLibraries = false
     }
@@ -50,6 +83,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+//    afterEvaluate {
+//        tasks.matching {
+//            it.name.startsWith('dex')
+//        }.each { dx ->
+//            if (dx.additionalParameters == null) {
+//                dx.additionalParameters = []
+//            }
+//            dx.additionalParameters += '--multi-dex' // enable multidex
+//
+//            // optional
+//            // dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
+//        }
+//    }
 }
 
 dependencies {
@@ -62,17 +109,59 @@ dependencies {
     compile 'com.orhanobut:logger:1.4'
     compile 'org.greenrobot:eventbus:3.0.0'
     //bmob-im:自2.0.5开始提供aar格式：包含BmobNewIM_xxxx.jar、androidasync_2.1.6.jar、bmob_im_notification_strings.xml
-    compile 'cn.bmob.android:bmob-im:2.0.5@aar'
+    compile('cn.bmob.android:bmob-im:2.0.5@aar') {
+        exclude(group: 'de.greenrobot.dao', module: 'de.greenrobot.dao')
+    }
     //bmob-sdk:3.4.7
     compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
-    compile 'fm.jiecao:jiecaovideoplayer:2.0_preview'
     compile 'jp.wasabeef:recyclerview-animators:2.2.1'
-    compile 'com.android.support:cardview-v7:23.+'
-    compile 'com.android.support:design:23.+'
-    compile 'com.android.support:recyclerview-v7:23.+'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
     compile 'com.liaoinstan.springview:library:1.2.5'
     compile 'com.lzy.widget:view-core:0.2.1'
-//    compile 'com.koushikdutta.ion:ion:2.+'
+    compile('com.koushikdutta.ion:ion:2.1.9') {
+        exclude module: 'androidasync'
+    }
+    compile project(':jcvideoplayer-lib')
+    compile project(':pooredit')
+    compile 'com.jpeng:JPTabBar:1.1.7'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.6.2'
+    compile 'com.danikula:videocache:2.6.4'
+    //    compile 'com.android.support:multidex:1.0.1'
+    compile 'org.jsoup:jsoup:1.10.1'
+    //    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'io.reactivex:rxjava:1.1.4'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'cn.finalteam:galleryfinal:1.4.8.7'
+    //    compile 'com.github.chrisbanes:PhotoView:1.3.1'
+
+    //    compile 'com.bm.photoview:library:1.4.1'
+    compile 'cn.carbs.android:AvatarImageView:1.0.3'
+    compile 'com.github.lzyzsd:circleprogress:1.0.0@aar'
+    //    compile 'com.dou361.ijkplayer:jjdxm-ijkplayer:1.0.6'
+    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
+    compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
+    compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
+    compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
+    compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
+    compile project(path: ':jjdxm-ijkplayer')
+    compile('com.github.yalantis:jellytoolbar:v1.0') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+    compile 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+//    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+    //脚本打包上传命令gradle publishApkDebug  gradle publishApkRelease
+    fir {
+        apiToken '90c7b649b2735b4c2dd195c175d37789'
+        //日志
+        changeLog '1.加入vip视频播放，暂时支持乐视和爱奇艺，因为我懒~'
+    }
+    bughd {
+        projectId '58eb450ea1de522ec1000014'
+        apiToken 'facb038dbb6b47228843004e7686808e'
+    }
 }

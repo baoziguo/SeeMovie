@@ -1,6 +1,7 @@
 package com.baozi.movie.bean;
 
 import com.baozi.movie.db.NewFriend;
+
 import cn.bmob.v3.BmobUser;
 
 /**
@@ -11,6 +12,16 @@ import cn.bmob.v3.BmobUser;
 public class User extends BmobUser {
 
     private String avatar;
+
+    public String getBg() {
+        return bg;
+    }
+
+    public void setBg(String bg) {
+        this.bg = bg;
+    }
+
+    private String bg;
 
     public User(){}
 
@@ -27,4 +38,5 @@ public class User extends BmobUser {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 }

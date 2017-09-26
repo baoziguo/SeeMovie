@@ -13,7 +13,6 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.event.FinishEvent;
 import com.baozi.movie.model.BaseModel;
@@ -21,11 +20,8 @@ import com.baozi.movie.model.UserModel;
 import com.baozi.movie.util.HideIMEUtil;
 import com.baozi.movie.util.StatusBarUtil;
 import com.baozi.seemovie.R;
-
 import org.greenrobot.eventbus.EventBus;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
@@ -49,7 +45,6 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new);
-        ButterKnife.bind(this);
         HideIMEUtil.wrap(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -118,6 +113,10 @@ public class RegisterActivity extends BaseActivity {
     }
 
     public void animateRevealClose() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            finish();
+            return;
+        }
         Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, cvAdd.getHeight(), fab.getWidth() / 2);
         mAnimator.setDuration(500);
         mAnimator.setInterpolator(new AccelerateInterpolator());

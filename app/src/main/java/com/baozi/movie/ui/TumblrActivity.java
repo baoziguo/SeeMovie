@@ -2,7 +2,6 @@ package com.baozi.movie.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +9,16 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.baozi.movie.adapter.TumblrAdapter;
 import com.baozi.movie.base.BaseActivity;
 import com.baozi.movie.bean.User;
 import com.baozi.movie.bean.kePao;
 import com.baozi.movie.model.UserModel;
 import com.baozi.seemovie.R;
+
 import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bmob.v3.BmobQuery;
@@ -30,8 +32,6 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
  */
 public class TumblrActivity extends BaseActivity {
 
-    @Bind(R.id.appbar)
-    AppBarLayout appbar;
     @Bind(R.id.lv_ml_list_view)
     RecyclerView lvMlListView;
     @Bind(R.id.main_content)
@@ -83,7 +83,7 @@ public class TumblrActivity extends BaseActivity {
 
             @Override
             public void onSuccess(List<kePao> loveEntity) {
-                mAdapter = new TumblrAdapter(TumblrActivity.this, loveEntity);
+                mAdapter = new TumblrAdapter(loveEntity);
                 lvMlListView.setLayoutManager(new LinearLayoutManager(TumblrActivity.this));
                 lvMlListView.setHasFixedSize(true);
                 AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(mAdapter);

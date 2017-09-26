@@ -9,9 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
-
 import com.baozi.movie.Config;
+import com.orhanobut.logger.Logger;
 
 
 /**基类

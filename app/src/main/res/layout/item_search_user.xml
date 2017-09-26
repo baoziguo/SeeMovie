@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
@@ -11,14 +12,17 @@
         android:padding="5dp"
         >
 
-        <ImageView
+        <cn.carbs.android.avatarimageview.library.AvatarImageView
             android:id="@+id/avatar"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="11dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/head" />
+            android:src="@mipmap/head"
+            app:aiv_BoarderWidth="1dp"
+            app:aiv_ShowBoarder="true"
+            app:aiv_TextSizeRatio="0.4"/>
 
         <TextView
             android:id="@+id/name"
