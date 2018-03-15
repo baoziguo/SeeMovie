@@ -5,9 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-/**
- * create by jpeng 11-23
- */
 public class NoScrollViewPager extends ViewPager {
     private boolean noScroll = true;
 

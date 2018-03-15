@@ -60,7 +60,7 @@ public class HomeNewActivity extends BaseActivity {
         int navigationBarHeight = NavbarUtil.getNavigationBarHeight(this);
         log("navigationBarHeight----->" + navigationBarHeight);
         log("设备------->" + Build.MANUFACTURER.replace(" ", ""));
-        if (DeviceAdaptationUtils.isSetTabHeight(navigationBarHeight)) {
+        if (DeviceAdaptationUtils.isSetTabHeight(navigationBarHeight, this)) {
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) ll_bottom_bar.getLayoutParams();
             layoutParams.bottomMargin = navigationBarHeight;
             ll_bottom_bar.setLayoutParams(layoutParams);
